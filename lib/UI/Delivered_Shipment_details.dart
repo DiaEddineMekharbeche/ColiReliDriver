@@ -67,7 +67,7 @@ class _DeliveredShipmentDetailsState extends State<DeliveredShipmentDetails> {
             color:Colors.black
         ),
         backgroundColor: Colors.white,
-        title: Text('Delivered Shipment Details',style: TextStyle(
+        title: Text('Delivered Shipment Details'.tr,style: TextStyle(
             fontWeight: FontWeight.bold,color: Colors.black
         ),),
       ),
@@ -120,7 +120,7 @@ class _DeliveredShipmentDetailsState extends State<DeliveredShipmentDetails> {
 
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text("Order",style: TextStyle(
+                            child: Text("Order".tr,style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
                               color: Colors.white,

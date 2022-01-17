@@ -97,8 +97,10 @@ class _WalletState extends State<Wallet> {
                             children: [
                               Text(
                                 controller.user.value.name ?? '',
+                                overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     fontSize: size.width/15,
+
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black),
                               ),

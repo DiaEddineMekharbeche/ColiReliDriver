@@ -67,7 +67,7 @@ class _FailedAttempsDetailsState extends State<FailedAttempsDetails> {
             color:Colors.black
         ),
         backgroundColor: Colors.white,
-        title: Text('Delivered Shipment Details'.tr,style: TextStyle(
+        title: Text('Failed Attempts Shipments'.tr,style: TextStyle(
             fontWeight: FontWeight.bold,color: Colors.black
         ),),
       ),
@@ -120,7 +120,7 @@ class _FailedAttempsDetailsState extends State<FailedAttempsDetails> {
 
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text("Order",style: TextStyle(
+                            child: Text("Order".tr,style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
                               color: Colors.white,

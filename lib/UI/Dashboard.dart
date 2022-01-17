@@ -8,6 +8,7 @@ import 'package:colireli_delivery/UI/ChoiceChipDisplay.dart';
 
 import 'package:colireli_delivery/UI/ColiScanned.dart';
 import 'package:colireli_delivery/UI/Delivered_Shipment_details.dart';
+import 'package:colireli_delivery/UI/Failed_Attempt_Details.dart';
 import 'package:colireli_delivery/UI/RestoreShipments.dart';
 import 'package:colireli_delivery/UI/Shipment_Card.dart';
 import 'package:flutter/cupertino.dart';
@@ -1213,7 +1214,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     child: GestureDetector(
                       onTap: () {
-                        Get.to(()=>DeliveredShipmentDetails() , arguments: [
+                        Get.to(()=>FailedAttempsDetails() , arguments: [
                           i
                         ]);
                       },

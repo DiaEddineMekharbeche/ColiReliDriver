@@ -76,6 +76,11 @@ const Map<String,String> fr ={
   'Yes':'Oui',
   'All Shipments are Canceled':'Tous les Colis sont annulés',
   'Hidden':'Caché',
+  'Failed Attempts Shipments':'Les Tentatives échouées',
+  'Delivered Shipment Details':'Les Colis livrés',
+  'Reasons':'Les Raisons',
+  'Select the key of reason':'Sélectionnez la clé',
+
 
 
 

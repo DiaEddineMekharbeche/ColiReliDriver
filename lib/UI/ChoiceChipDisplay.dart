@@ -67,7 +67,7 @@ class _ChoiceChipDisplayState extends State<ChoiceChipDisplay> {
                 ),
                 child: Center(
                   child: Text(
-                    'Reasons',
+                    'Reasons'.tr,
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 24.0,
@@ -98,7 +98,7 @@ class _ChoiceChipDisplayState extends State<ChoiceChipDisplay> {
 
                       child: DropdownButton(
                         underline: SizedBox(),
-                        hint: Text('Select the key of reason',style: TextStyle(
+                        hint: Text('Select the key of reason'.tr,style: TextStyle(
                           fontSize: 16,fontWeight: FontWeight.normal
                         ),),
                         dropdownColor: Colors.white,
@@ -147,7 +147,7 @@ class _ChoiceChipDisplayState extends State<ChoiceChipDisplay> {
                     child: RaisedButton(
                         color: Color(0xffffbf00),
                         child: new Text(
-                          'Submit',
+                          'Submit'.tr,
                           style: TextStyle(
                               color: Color(0xffffffff),
                               fontSize: 18.0,
@@ -255,7 +255,8 @@ class _choiceChipWidgetState extends State<choiceChipWidget> {
               borderRadius: BorderRadius.circular(30.0),
             ),
             backgroundColor: Color(0xffededed),
-            selectedColor: Color(0xffffc107),
+
+            selectedColor: Color(0xffffc107) ,
             selected: selectedChoice == item,
             onSelected: (selected) {
               setState(() {

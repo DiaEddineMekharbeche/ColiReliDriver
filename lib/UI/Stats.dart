@@ -93,6 +93,7 @@ class _StatsState extends State<Stats> {
                                 children: [
                                   Text(
                                     controller.user.value.name ?? '',
+                                    overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         fontSize: size.width/15,
                                         fontWeight: FontWeight.bold,
