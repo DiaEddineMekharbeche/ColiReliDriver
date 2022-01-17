@@ -79,7 +79,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
           overlayOpacity: 0.3,
           children: [
             SpeedDialChild(
-              child: Icon (Icons.add,size: 25),
+              child: Icon (Icons.add,size: 25,color: Colors.white,),
               backgroundColor: Colors.green,
               label: 'Create Mission'.tr,
               labelBackgroundColor: Colors.white,
@@ -88,7 +88,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
               }
             ),
             SpeedDialChild(
-              child: Icon (Icons.edit_outlined,size: 25),
+              child: Icon (Icons.edit_outlined,size: 25,color: Colors.white,),
               backgroundColor: Colors.blue,
               labelBackgroundColor: Colors.white,
               label: 'Edit mission'.tr,
@@ -1213,7 +1213,9 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     child: GestureDetector(
                       onTap: () {
-
+                        Get.to(()=>DeliveredShipmentDetails() , arguments: [
+                          i
+                        ]);
                       },
                       child: Container(
                           padding: EdgeInsets.only(
