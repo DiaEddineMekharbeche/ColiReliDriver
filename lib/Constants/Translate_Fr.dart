@@ -80,6 +80,7 @@ const Map<String,String> fr ={
   'Delivered Shipment Details':'Les Colis livrés',
   'Reasons':'Les Raisons',
   'Select the key of reason':'Sélectionnez la clé',
+  'Available':'Disponible',
 
 
 

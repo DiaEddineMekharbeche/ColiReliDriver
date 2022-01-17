@@ -162,20 +162,33 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 2),
-                                  child: new Container(
 
-                                      width: size.width/6,
-                                      height: size.height/12,
-                                      decoration: new BoxDecoration(
 
-                                          shape: BoxShape.circle,
-                                          image: new DecorationImage(
-                                            image: new ExactAssetImage(
-                                                'assets/profile_pic.png'),
-                                            fit: BoxFit.fill,
-                                          ))),
+                                Badge(elevation: 8,borderSide: BorderSide(width: 1,color: Colors.green),
+
+                                  position: BadgePosition.bottomEnd(bottom: 8,end:8),
+                                  animationDuration: Duration(milliseconds: 300),
+                                  animationType: BadgeAnimationType.slide,
+                                  shape: BadgeShape.circle,
+                                  badgeColor:  Colors.green ,
+                                  padding: EdgeInsets.all(6),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 2),
+                                    child: new Container(
+
+                                        width: size.width/6,
+                                        height: size.height/12,
+                                        decoration: new BoxDecoration(
+
+                                            shape: BoxShape.circle,
+                                            image: new DecorationImage(
+                                              image: new ExactAssetImage(
+                                                  'assets/profile_pic.png'),
+                                              fit: BoxFit.fill,
+                                            ))),
+
+
+                                  ),
                                 ),
                                 Container(
 
