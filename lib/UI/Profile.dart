@@ -396,6 +396,10 @@ class _ProfileState extends State<Profile> {
   void logoutUser()async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
    await prefs.clear();
+   controller.listFailedAttempt.clear();
+   controller.lisDeliveredColi.clear();
+   controller.listColi.clear();
+
     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginUi()), (route) => false);
 
   }

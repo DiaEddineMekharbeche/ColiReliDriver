@@ -97,7 +97,7 @@ class AuthRepo {
 
 
     }else{
-      Get.snackbar("Error",msg,duration: Duration(seconds: 4),
+      Get.snackbar("Error",jsonDecode(res.body)['message'],duration: Duration(seconds: 4),
           backgroundColor: Colors.red,colorText: Colors.white,snackPosition: SnackPosition.BOTTOM,margin: EdgeInsets.only(bottom: 20,left: 20,right: 20));
     }
 

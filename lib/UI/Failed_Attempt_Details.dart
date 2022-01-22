@@ -49,7 +49,7 @@ class _FailedAttempsDetailsState extends State<FailedAttempsDetails> {
 
   getSharedidshipment ()async{
     var pref = await SharedPreferences.getInstance();
-    await pref.setString("shipmentid", controller.listColi[index!].id!.toString());
+    await pref.setString("shipmentid", controller.listFailedAttempt[index!].id!.toString());
     print('shared store succeen shipment');
     return "success" ;
   }

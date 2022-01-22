@@ -31,14 +31,13 @@ import 'home.dart';
 class DeliveredShipmentDetails extends  StatefulWidget {
 
 
-  ColiController controller = Get.find();
+
 
   @override
   _DeliveredShipmentDetailsState createState() => _DeliveredShipmentDetailsState();
 }
 
 class _DeliveredShipmentDetailsState extends State<DeliveredShipmentDetails> {
-
 
   final controller = Get.put(ColiController());
   int? index = Get.arguments[0];
@@ -49,7 +48,7 @@ class _DeliveredShipmentDetailsState extends State<DeliveredShipmentDetails> {
 
   getSharedidshipment ()async{
     var pref = await SharedPreferences.getInstance();
-    await pref.setString("shipmentid", controller.listColi[index!].id!.toString());
+    await pref.setString("shipmentid", controller.lisDeliveredColi[index!].id!.toString());
     print('shared store succeen shipment');
     return "success" ;
   }
@@ -451,7 +450,7 @@ class _DeliveredShipmentDetailsState extends State<DeliveredShipmentDetails> {
                           Text('Mobile Number:'.tr,style: TextStyle(
                               fontSize: 12,color: Colors.black
                           ),),
-                          Text("Hidden".tr,style: TextStyle(
+                          Text('Hidden'.tr,style: TextStyle(
                               fontSize: 12,color: Colors.grey,
                               fontWeight: FontWeight.bold
                           ),),
@@ -489,16 +488,12 @@ class _DeliveredShipmentDetailsState extends State<DeliveredShipmentDetails> {
 
   int add (String amount , String shipingCost){
 
-    var amountInt = (controller.listColi[index!].amountToBeCollected!);
-    var shipingCostInt = (controller.listColi[index!].shippingCost!);
+    var amountInt = (controller.lisDeliveredColi[index!].amountToBeCollected!);
+    var shipingCostInt = (controller.lisDeliveredColi[index!].shippingCost!);
     var add = (amountInt+shipingCostInt);
 
     return add;
   }
-
-
-
-
 
 }
 

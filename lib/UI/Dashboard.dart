@@ -882,6 +882,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                         Get.to(()=>DeliveredShipmentDetails() , arguments: [
                           i
                         ]);
+                        print(i.toString());
                       },
                       child: Container(
                           padding: EdgeInsets.only(
