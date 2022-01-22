@@ -265,6 +265,8 @@ class _AssignedShipmentState extends State<AssignedShipment> {
                                 controller.ListAssignedShipment[i].isSelected = value!;
                                 if(controller.ListAssignedShipment[i].isSelected == true){
                                   _selectedItems.add(controller.ListAssignedShipment[i].id!.toString());
+                                }if(controller.ListAssignedShipment[i].isSelected == false){
+                                  _selectedItems.remove(controller.ListAssignedShipment[i].id!.toString());
                                 }
 
                               });

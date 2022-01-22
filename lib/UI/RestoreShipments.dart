@@ -270,6 +270,8 @@ class _RestoreShipmentsState extends State<RestoreShipments> {
                                 controller.listFailedAttempt[i].isSelected = value!;
                                 if(controller.listFailedAttempt[i].isSelected == true){
                                   _selectedItems.add(controller.listFailedAttempt[i].id!.toString());
+                                }if(controller.ListAssignedShipment[i].isSelected == false){
+                                  _selectedItems.remove(controller.listFailedAttempt[i].id!.toString());
                                 }
 
                               });

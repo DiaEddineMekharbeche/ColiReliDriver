@@ -273,6 +273,10 @@ class _OutToDeliveryState extends State<OutToDelivery> {
                                 if(controller.ListMission[i].isSelected == true){
                                   _selectedItems.add(controller.ListMission[i].shipmentId!.toString());
                                 }
+                                if(controller.ListMission[i].isSelected == false){
+                                  _selectedItems.remove(controller.ListMission[i].shipmentId!.toString());
+                                }
+                                print(_selectedItems.toString());
 
                               });
                             },
