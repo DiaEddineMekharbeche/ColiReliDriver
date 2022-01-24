@@ -304,7 +304,7 @@ class _WalletState extends State<Wallet> {
                                       MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "Tracking Code:",
+                                          "Tracking Code:".tr,
                                           style: TextStyle(
                                             color:
                                             Colors.black.withOpacity(0.5),
@@ -334,7 +334,7 @@ class _WalletState extends State<Wallet> {
                                     Row(
                                       children: [
                                         Text(
-                                          "Status:",
+                                          "Status:".tr,
                                           style: TextStyle(
                                             color:
                                             Colors.black.withOpacity(0.5),
@@ -367,7 +367,7 @@ class _WalletState extends State<Wallet> {
                                     Row(
                                       children: [
                                         Text(
-                                          "Total Payment:",
+                                          "Collected Amount:".tr,
                                           style: TextStyle(
                                             color:
                                             Colors.black.withOpacity(0.5),
@@ -379,7 +379,7 @@ class _WalletState extends State<Wallet> {
                                           padding:
                                           const EdgeInsets.only(left: 5),
                                           child: Text(
-                                            controller.detailsRaport[i].price!.toString()+" DA",
+                                            controller.detailsRaport[i].price!.toString()+",00  DA",
                                             style: TextStyle(
                                               color: Colors.red,
                                               fontSize: 12,

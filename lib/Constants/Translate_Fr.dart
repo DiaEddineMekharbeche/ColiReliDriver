@@ -81,6 +81,9 @@ const Map<String,String> fr ={
   'Reasons':'Les Raisons',
   'Select the key of reason':'Sélectionnez la clé',
   'Available':'Disponible',
+  'Tracking Code:':'Code du Colis:',
+  'Status:':'Statut:',
+  'Collected Amount:':'Montant collecté :'
 
 
 

@@ -399,6 +399,8 @@ class _ProfileState extends State<Profile> {
    controller.listFailedAttempt.clear();
    controller.lisDeliveredColi.clear();
    controller.listColi.clear();
+   controller.reasonsList.clear();
+   controller.detailsRaport.clear();
 
     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginUi()), (route) => false);
 
