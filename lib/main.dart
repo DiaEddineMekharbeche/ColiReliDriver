@@ -7,6 +7,7 @@ import 'package:colireli_delivery/UI/Shipment_Card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,6 +20,7 @@ import 'UI/home.dart';
 String?  token;
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   token = await prefs.getString("token");

@@ -90,7 +90,7 @@ class _DeliveredShipmentDetailsState extends State<DeliveredShipmentDetails> {
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Container(
-              height: size.height/4,
+              height: size.height/3.3,
               width: size.width,
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -163,10 +163,22 @@ class _DeliveredShipmentDetailsState extends State<DeliveredShipmentDetails> {
                           Text('Shipping Cost:'.tr,style: TextStyle(
                               fontSize: 12,color: Colors.black
                           ),),
-                          Text(controller.lisDeliveredColi[index!].shippingCost!.toString()+",00 DA",style: TextStyle(
-                              fontSize: 12,color: Colors.black,
-                              fontWeight: FontWeight.bold
-                          ),),
+                          Row(
+                            children: [
+                              Text(controller.lisDeliveredColi[index!].shippingCost!.toString()+",00 ",style: TextStyle(
+                                  fontSize: 12,color: Colors.black,
+                                  fontWeight: FontWeight.bold
+                              ),),
+                              Text(
+                                "DA ".tr,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
@@ -181,10 +193,22 @@ class _DeliveredShipmentDetailsState extends State<DeliveredShipmentDetails> {
                           Text('Package Cost:',style: TextStyle(
                               fontSize: 12,color: Colors.black
                           ),),
-                          Text(controller.lisDeliveredColi[index!].amountToBeCollected!.toString()+',00 DA',style: TextStyle(
-                              fontSize: 12,color: Colors.black,
-                              fontWeight: FontWeight.bold
-                          ),),
+                          Row(
+                            children: [
+                              Text(controller.lisDeliveredColi[index!].amountToBeCollected!.toString()+',00 ',style: TextStyle(
+                                  fontSize: 12,color: Colors.black,
+                                  fontWeight: FontWeight.bold
+                              ),),
+                              Text(
+                                "DA ".tr,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
@@ -203,10 +227,22 @@ class _DeliveredShipmentDetailsState extends State<DeliveredShipmentDetails> {
                             Text('Amount to be collected:'.tr,style: TextStyle(
                                 fontSize: 12,color: Colors.red
                             ),),
-                            Text(add(controller.lisDeliveredColi[index!].amountToBeCollected!.toString(), controller.lisDeliveredColi[index!].shippingCost!.toString()).toString()+',00 DA',style: TextStyle(
-                                fontSize: 12,color: Colors.red,
-                                fontWeight: FontWeight.bold
-                            ),),
+                            Row(
+                              children: [
+                                Text(add(controller.lisDeliveredColi[index!].amountToBeCollected!.toString(), controller.lisDeliveredColi[index!].shippingCost!.toString()).toString()+',00 ',style: TextStyle(
+                                    fontSize: 12,color: Colors.red,
+                                    fontWeight: FontWeight.bold
+                                ),),
+                                Text(
+                                  "DA ".tr,
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),
@@ -377,7 +413,7 @@ class _DeliveredShipmentDetailsState extends State<DeliveredShipmentDetails> {
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Container(
-              height: size.height/6.5,
+              height: size.height/6,
               width: size.width,
               decoration: BoxDecoration(
                   color: Colors.white,

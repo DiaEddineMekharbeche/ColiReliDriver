@@ -137,7 +137,7 @@ class _RestoreShipmentsState extends State<RestoreShipments> {
               child: Container(
                   padding:
                   EdgeInsets.only(left: 10, right: 14, top: 10, bottom: 10),
-                  height: size.height / 9,
+                  height: size.height / 7.3,
                   width: size.width,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -245,15 +245,27 @@ class _RestoreShipmentsState extends State<RestoreShipments> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 5),
-                                    child: Text(
-                                      (controller.listFailedAttempt[i]
-                                          .amountToBeCollected!).toString() +
-                                          ',00  DA',
-                                      style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          (controller.listFailedAttempt[i]
+                                              .amountToBeCollected!).toString() +
+                                              ',00 ',
+                                          style: TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        Text(
+                                          "DA ".tr,
+                                          style: TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ],
@@ -267,12 +279,16 @@ class _RestoreShipmentsState extends State<RestoreShipments> {
                             value:controller.listFailedAttempt[i].isSelected ,
                             onChanged: (bool? value) {
                               setState(() {
+                                print(value.toString());
                                 controller.listFailedAttempt[i].isSelected = value!;
+                                print(controller.listFailedAttempt[i].isSelected.toString());
                                 if(controller.listFailedAttempt[i].isSelected == true){
                                   _selectedItems.add(controller.listFailedAttempt[i].id!.toString());
-                                }if(controller.ListAssignedShipment[i].isSelected == false){
+                                }
+                                if(controller.listFailedAttempt[i].isSelected == false){
                                   _selectedItems.remove(controller.listFailedAttempt[i].id!.toString());
                                 }
+                                print(_selectedItems.toString());
 
                               });
                             },

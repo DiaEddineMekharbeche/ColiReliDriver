@@ -22,6 +22,8 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'LocalStorage.dart';
+
 
 class ColiController extends GetxController {
   var allColis = <Coli>[].obs;
@@ -35,6 +37,7 @@ class ColiController extends GetxController {
   var ListMission = <Mission>[].obs;
   var listids = <int>[].obs;
   var user = User().obs;
+  var appLocale ;
 
   var reasonsList = <Reasons>[].obs;
   var reason = Reasons().obs;
@@ -80,6 +83,13 @@ class ColiController extends GetxController {
       }
     });
     super.onInit();
+    LocalStorage localStorage = LocalStorage();
+
+    appLocale = await localStorage.languageSelected == null
+        ? Get.deviceLocale
+        : await localStorage.languageSelected;
+    update();
+    Get.updateLocale(Locale(appLocale));
   }
 
   Future<void> scanBarcode() async {
@@ -509,6 +519,21 @@ class ColiController extends GetxController {
         isLoading(false);
       }
     }
+  }
+  void changeLanguage(String type) async {
+    LocalStorage localStorage = LocalStorage();
+
+    if (appLocale == type) {
+      return;
+    }
+    if (type == 'ar') {
+      appLocale = 'ar';
+      localStorage.saveLanguageToDisk('ar');
+    } else if(type == 'fr'){
+      appLocale = 'fr';
+      localStorage.saveLanguageToDisk('fr');
+    }
+    update();
   }
 
 }

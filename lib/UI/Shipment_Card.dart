@@ -112,9 +112,9 @@ class _ShipementCardState extends State<ShipementCard> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.only(left: 20,right: 20,bottom: 10,top:8),
             child: Container(
-              height: size.height/4,
+              height: size.height/3.3,
               width: size.width,
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -187,10 +187,19 @@ class _ShipementCardState extends State<ShipementCard> {
                           Text('Shipping Cost:'.tr,style: TextStyle(
                               fontSize: 12,color: Colors.black
                           ),),
-                          Text(controller.listColi[index!].shippingCost!.toString()+",00 DA",style: TextStyle(
-                              fontSize: 12,color: Colors.black,
-                              fontWeight: FontWeight.bold
-                          ),),
+                          Row(
+                            children: [
+                              Text(controller.listColi[index!].shippingCost!.toString()+",00",style: TextStyle(
+                                  fontSize: 12,color: Colors.black,
+                                  fontWeight: FontWeight.bold
+                              ),),
+                              Text("DA ".tr,style: TextStyle(
+                                  fontSize: 12,color: Colors.black,
+                                  fontWeight: FontWeight.bold
+                              ),),
+                            ],
+                          ),
+
                         ],
                       ),
                     ),
@@ -205,10 +214,19 @@ class _ShipementCardState extends State<ShipementCard> {
                           Text('Package Cost:'.tr,style: TextStyle(
                               fontSize: 12,color: Colors.black
                           ),),
-                          Text(controller.listColi[index!].amountToBeCollected!.toString()+',00 DA',style: TextStyle(
-                              fontSize: 12,color: Colors.black,
-                              fontWeight: FontWeight.bold
-                          ),),
+                          Row(
+                            children: [
+                              Text(controller.listColi[index!].amountToBeCollected!.toString()+',00 ',style: TextStyle(
+                                  fontSize: 12,color: Colors.black,
+                                  fontWeight: FontWeight.bold
+                              ),),
+                              Text("DA ".tr,style: TextStyle(
+                                  fontSize: 12,color: Colors.black,
+                                  fontWeight: FontWeight.bold
+                              ),),
+                            ],
+                          ),
+
                         ],
                       ),
                     ),
@@ -227,10 +245,19 @@ class _ShipementCardState extends State<ShipementCard> {
                             Text('Amount to be collected:'.tr,style: TextStyle(
                                 fontSize: 12,color: Colors.red
                             ),),
-                            Text(add(controller.listColi[index!].amountToBeCollected!.toString(), controller.listColi[index!].shippingCost!.toString()).toString()+',00 DA',style: TextStyle(
-                                fontSize: 12,color: Colors.red,
-                                fontWeight: FontWeight.bold
-                            ),),
+                            Row(
+                              children: [
+                                Text(add(controller.listColi[index!].amountToBeCollected!.toString(), controller.listColi[index!].shippingCost!.toString()).toString()+',00',style: TextStyle(
+                                    fontSize: 12,color: Colors.red,
+                                    fontWeight: FontWeight.bold
+                                ),),
+                                Text("DA ".tr,style: TextStyle(
+                                    fontSize: 12,color: Colors.black,
+                                    fontWeight: FontWeight.bold
+                                ),),
+                              ],
+                            ),
+
                           ],
                         ),
                       ),
@@ -399,9 +426,9 @@ class _ShipementCardState extends State<ShipementCard> {
           ),
           //******************************************second box********************
           Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.only(left:20,right: 20 ,top: 10,bottom:10),
             child: Container(
-              height: size.height/6.5,
+              height: size.height/6.0,
               width: size.width,
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -492,7 +519,7 @@ class _ShipementCardState extends State<ShipementCard> {
 
 
           Padding(
-            padding: const EdgeInsets.only(left:20,right: 20,top: 0),
+            padding: const EdgeInsets.only(left:20,right: 20,top: 0,bottom: 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

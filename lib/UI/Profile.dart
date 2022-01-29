@@ -144,14 +144,15 @@ class _ProfileState extends State<Profile> {
                               child: Text('English'),
                               value: 'en',
                             ),
+                            DropdownMenuItem(
+                              child: Text('العربية'),
+                              value: 'ar',
+                            ),
                           ],
-                          value :_selectLanguage,
+                          value :controller.appLocale,
                           onChanged: (value){
-                            setState(() {
-                              _selectLanguage = value.toString();
-
-                            });
-                            Get.updateLocale(Locale(_selectLanguage));
+                            controller.changeLanguage(value.toString());
+                            Get.updateLocale(Locale(value.toString()));
 
                           },
                         ),

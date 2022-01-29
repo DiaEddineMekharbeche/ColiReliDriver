@@ -44,7 +44,7 @@ class Coli {
   int?  toCountryId;
   int?  toStateId;
   int?   toAreaId;
-  String?  prevBranch;
+  int?  prevBranch;
   int?  clientStatus;
   int?  amountToBeCollected;
   String?  orderId;

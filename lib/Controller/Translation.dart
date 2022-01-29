@@ -2,6 +2,7 @@
 
 
 import 'package:colireli_delivery/Constants/Translate_Fr.dart';
+import 'package:colireli_delivery/Constants/Translate_ar.dart';
 import 'package:get/get_navigation/src/root/internacionalization.dart';
 
 class Translation extends Translations{
@@ -10,6 +11,7 @@ class Translation extends Translations{
   Map<String, Map<String, String>> get keys => {
 
     'fr' :fr,
+    'ar':ar,
   };
 
 

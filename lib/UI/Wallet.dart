@@ -202,22 +202,49 @@ class _WalletState extends State<Wallet> {
                               fontSize: 16,fontWeight: FontWeight.bold,color: Colors.white.withOpacity(0.8),
                             ),),
                         ),
-                       Obx(()=>  Text( controller.reports.value.total!=null ?'${controller.reports.value.total},00  DA'.toString() : '0,00  DA' ,style: TextStyle(
-                            fontWeight: FontWeight.bold,fontSize: 30,color: Colors.white
-                        ),)
+                       Obx(()=>  Row(
+                         children: [
+                           Text( controller.reports.value.total!=null ?'${controller.reports.value.total},00'.toString() : '0,00' ,style: TextStyle(
+                                fontWeight: FontWeight.bold,fontSize: 30,color: Colors.white
+                            ),),
+                           Text(
+                             "DA ".tr,
+                             style: TextStyle(
+                               color: Colors.white,
+                               fontSize: 30,
+                               fontWeight: FontWeight.bold,
+                             ),
+                           ),
+                         ],
+                       )
                        ),
 
                       ],
                     ),
                     Row(
                       children: [
-                          Obx(()=>   Text(controller.reports.value.deliveryFee !=null ?'+${controller.reports.value.deliveryFee},00  DA '.toString() : '0,00  DA   ',style: TextStyle(
-                            fontWeight: FontWeight.bold,fontSize: 15,color: Colors.greenAccent
+                          Obx(()=>   Row(
+                            children: [
+                              Text(controller.reports.value.deliveryFee !=null ?'+${controller.reports.value.deliveryFee},00 '.toString() : '0,00 ',style: TextStyle(
+                                fontWeight: FontWeight.bold,fontSize: 15,color: Colors.greenAccent
                         ),),
+                              Text(
+                                "DA ".tr,
+                                style: TextStyle(
+                                  color: Colors.greenAccent,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
-                        Text('Delivery Fee'.tr,style: TextStyle(
-                            fontWeight: FontWeight.bold,fontSize: 15,color: Colors.greenAccent
-                        ),)
+                          ),
+                        Padding(
+                          padding: const EdgeInsets.only(left:5.0,right: 5),
+                          child: Text('Delivery Fee'.tr,style: TextStyle(
+                              fontWeight: FontWeight.bold,fontSize: 15,color: Colors.greenAccent
+                          ),),
+                        )
 
                       ],
                     )
@@ -379,7 +406,19 @@ class _WalletState extends State<Wallet> {
                                           padding:
                                           const EdgeInsets.only(left: 5),
                                           child: Text(
-                                            controller.detailsRaport[i].price!.toString()+",00  DA",
+                                            controller.detailsRaport[i].price!.toString()+",00 ",
+                                            style: TextStyle(
+                                              color: Colors.red,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                          const EdgeInsets.only(left: 5),
+                                          child: Text(
+                                            "DA ".tr,
                                             style: TextStyle(
                                               color: Colors.red,
                                               fontSize: 12,

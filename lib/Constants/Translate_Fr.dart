@@ -83,7 +83,8 @@ const Map<String,String> fr ={
   'Available':'Disponible',
   'Tracking Code:':'Code du Colis:',
   'Status:':'Statut:',
-  'Collected Amount:':'Montant collecté :'
+  'Collected Amount:':'Montant collecté :',
+  'DA ':'DA ',
 
 
 

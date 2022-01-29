@@ -316,6 +316,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                               },
                              child: Container(
 
+
                                child: Column(
 
                                   children: [
@@ -538,7 +539,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                     child: Container(
                         padding: EdgeInsets.only(
                             left: 10, right: 10, top: 10, bottom: 10),
-                        height: size.height / 4.7,
+                        height: size.height / 4.0,
                         width: size.width,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -654,15 +655,27 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                                             Padding(
                                               padding:
                                                   const EdgeInsets.only(left: 5),
-                                              child: Text(
-                                                ((controller.listColi[i].amountToBeCollected!)+(controller.listColi[i].shippingCost!)).toString() +',00  DA',
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    ((controller.listColi[i].amountToBeCollected!)+(controller.listColi[i].shippingCost!)).toString() +',00 ',
 
 
-                                                style: TextStyle(
-                                                  color: Colors.red,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
+                                                    style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontSize: 12,
+                                                      fontWeight: FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "DA ".tr,
+                                                    style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontSize: 12,
+                                                      fontWeight: FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ],
@@ -887,7 +900,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                       child: Container(
                           padding: EdgeInsets.only(
                               left: 10, right: 10, top: 10, bottom: 10),
-                          height: size.height / 4.7,
+                          height: size.height / 4.0,
                           width: size.width,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -995,15 +1008,27 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                                           Padding(
                                             padding:
                                             const EdgeInsets.only(left: 5),
-                                            child: Text(
-                                              ((controller.lisDeliveredColi[i].amountToBeCollected!)+(controller.lisDeliveredColi[i].shippingCost!)).toString()  +',00  DA',
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  ((controller.lisDeliveredColi[i].amountToBeCollected!)+(controller.lisDeliveredColi[i].shippingCost!)).toString()  +',00 ',
 
 
-                                              style: TextStyle(
-                                                color: Colors.red,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w600,
-                                              ),
+                                                  style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "DA ".tr,
+                                                  style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ],
@@ -1235,7 +1260,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                       child: Container(
                           padding: EdgeInsets.only(
                               left: 10, right: 10, top: 10, bottom: 10),
-                          height: size.height / 4.7,
+                          height: size.height / 4.0,
                           width: size.width,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -1343,15 +1368,27 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                                           Padding(
                                             padding:
                                             const EdgeInsets.only(left: 5),
-                                            child: Text(
-                                              ((controller.listFailedAttempt[i].amountToBeCollected!)+(controller.listFailedAttempt[i].shippingCost!)).toString()  +',00  DA',
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  ((controller.listFailedAttempt[i].amountToBeCollected!)+(controller.listFailedAttempt[i].shippingCost!)).toString()  +',00 ',
 
 
-                                              style: TextStyle(
-                                                color: Colors.red,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w600,
-                                              ),
+                                                  style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "DA ".tr,
+                                                  style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ],
