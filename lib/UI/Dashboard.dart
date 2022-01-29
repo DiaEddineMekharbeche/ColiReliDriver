@@ -539,7 +539,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                     child: Container(
                         padding: EdgeInsets.only(
                             left: 10, right: 10, top: 10, bottom: 10),
-                        height: size.height / 4.3,
+                        height: size.height / 4.0,
                         width: size.width,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -900,7 +900,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                       child: Container(
                           padding: EdgeInsets.only(
                               left: 10, right: 10, top: 10, bottom: 10),
-                          height: size.height / 4.3,
+                          height: size.height /  4.0,
                           width: size.width,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -1260,7 +1260,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                       child: Container(
                           padding: EdgeInsets.only(
                               left: 10, right: 10, top: 10, bottom: 10),
-                          height: size.height / 4.3,
+                          height: size.height /  4.0,
                           width: size.width,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(20)),

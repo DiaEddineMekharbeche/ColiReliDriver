@@ -426,7 +426,7 @@ class _StatsState extends State<Stats> {
                                           padding:
                                           const EdgeInsets.only(left: 5),
                                           child: Container(
-                                            width: size.width / 3.5,
+                                            width: size.width / 4,
                                             child: Text(
                                               controller.lisDeliveredColi[i].reciverAddress!
                                                   .toUpperCase(),

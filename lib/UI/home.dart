@@ -9,6 +9,7 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
 import 'package:colireli_delivery/Constants/Constants.dart';
 import 'package:colireli_delivery/Controller/ColiCntroller.dart';
+import 'package:colireli_delivery/Controller/NotificationLocal.dart';
 
 import 'package:colireli_delivery/UI/Dashboard.dart';
 import 'package:colireli_delivery/UI/Profile.dart';
@@ -44,6 +45,7 @@ final controller = Get.put(ColiController());
     controller.getAssignedShipmentController();
    // controller.getPaymentReportController();
     controller.getUserController();
+    NotificationLocal.init();
 
     super.initState();
   }
