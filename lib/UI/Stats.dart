@@ -350,7 +350,7 @@ class _StatsState extends State<Stats> {
                     child: Container(
                         padding: EdgeInsets.only(
                             left: 10, right: 10, top: 10, bottom: 10),
-                        height: size.height / 9,
+                        height: size.height / 7.3,
                         width: size.width,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -384,7 +384,7 @@ class _StatsState extends State<Stats> {
                                       MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "Oder Id:",
+                                          "Order Id:".tr,
                                           style: TextStyle(
                                             color:
                                             Colors.black.withOpacity(0.5),
@@ -414,7 +414,7 @@ class _StatsState extends State<Stats> {
                                     Row(
                                       children: [
                                         Text(
-                                          "Receiver address:",
+                                          "Receiver address:".tr,
                                           style: TextStyle(
                                             color:
                                             Colors.black.withOpacity(0.5),
@@ -426,7 +426,7 @@ class _StatsState extends State<Stats> {
                                           padding:
                                           const EdgeInsets.only(left: 5),
                                           child: Container(
-                                            width: size.width / 2.5,
+                                            width: size.width / 3.5,
                                             child: Text(
                                               controller.lisDeliveredColi[i].reciverAddress!
                                                   .toUpperCase(),
@@ -447,7 +447,7 @@ class _StatsState extends State<Stats> {
                                     Row(
                                       children: [
                                         Text(
-                                          "Total Payment:",
+                                          "Amount to be collected:".tr,
                                           style: TextStyle(
                                             color:
                                             Colors.black.withOpacity(0.5),
@@ -458,15 +458,23 @@ class _StatsState extends State<Stats> {
                                         Padding(
                                           padding:
                                           const EdgeInsets.only(left: 5),
-                                          child: Text(
-                                            controller.lisDeliveredColi[i]
-                                                .amountToBeCollected!.toString() +
-                                                ' DA',
-                                            style: TextStyle(
-                                              color: Colors.red,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w600,
-                                            ),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                controller.lisDeliveredColi[i]
+                                                    .amountToBeCollected!.toString() +
+                                                    ',00 ',
+                                                style: TextStyle(
+                                                  color: Colors.red,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                              Text("DA ".tr,style: TextStyle(
+                                                  fontSize: 12,color: Colors.red,
+                                                  fontWeight: FontWeight.w600
+                                              ),),
+                                            ],
                                           ),
                                         ),
                                       ],

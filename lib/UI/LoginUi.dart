@@ -145,7 +145,7 @@ class _LoginUiState extends State<LoginUi> {
                         child: TextField(
                           controller: email,
                           keyboardType: TextInputType.emailAddress,
-                          autofocus: false,
+                          autofocus: true,
                           decoration: InputDecoration(
                               prefixIcon: Icon(Icons.email),
                               filled: true,
@@ -165,7 +165,7 @@ class _LoginUiState extends State<LoginUi> {
                         child: TextField(
                           controller:  password,
 
-                          autofocus: true,
+                         
                           obscureText: _passwordVisible,
 
                           decoration: InputDecoration(
