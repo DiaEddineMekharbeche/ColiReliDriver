@@ -1,6 +1,7 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/rxdart.dart';
 
+
 class NotificationLocal{
 static final _notifications = FlutterLocalNotificationsPlugin();
 static final onNotifications = BehaviorSubject<String?>();
@@ -9,7 +10,7 @@ static Future _notificationDetails()async{
     android:  AndroidNotificationDetails(
       'channel id',
       'channel name',
-      'channel description',
+      //'channel description',
     ),
     iOS: IOSNotificationDetails(),
   );
@@ -38,23 +39,6 @@ static Future showNotification({
   payload: payload,
   );
 
-static Future showScheduledNotification({
-  int id = 0,
-  String? title,
-  String? body,
-  String? payload,
-  required DateTime scheduledDate,
 
-
-})async => _notifications.zonedSchedule(
-  id,
-  title,
-  body,
-  tz.TZDateTime.from(scheduledDate,tz.local),
-  await _notificationDetails(),
-  payload: payload,
-  androidAllowWhileIdle: true,
-  uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-);
 }
 
