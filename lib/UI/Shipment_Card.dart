@@ -189,7 +189,7 @@ class _ShipementCardState extends State<ShipementCard> {
                           ),),
                           Row(
                             children: [
-                              Text(controller.listColi[index!].shippingCost!.toString()+",00",style: TextStyle(
+                              Text(controller.listColi[index!].shippingCost!.toString()+",00 ",style: TextStyle(
                                   fontSize: 12,color: Colors.black,
                                   fontWeight: FontWeight.bold
                               ),),
@@ -247,12 +247,12 @@ class _ShipementCardState extends State<ShipementCard> {
                             ),),
                             Row(
                               children: [
-                                Text(add(controller.listColi[index!].amountToBeCollected!.toString(), controller.listColi[index!].shippingCost!.toString()).toString()+',00',style: TextStyle(
+                                Text(add(controller.listColi[index!].amountToBeCollected!.toString(), controller.listColi[index!].shippingCost!.toString()).toString()+',00 ',style: TextStyle(
                                     fontSize: 12,color: Colors.red,
                                     fontWeight: FontWeight.bold
                                 ),),
                                 Text("DA ".tr,style: TextStyle(
-                                    fontSize: 12,color: Colors.black,
+                                    fontSize: 12,color: Colors.red,
                                     fontWeight: FontWeight.bold
                                 ),),
                               ],
