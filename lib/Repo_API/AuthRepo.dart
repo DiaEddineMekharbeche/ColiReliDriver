@@ -3,6 +3,8 @@ import 'dart:convert';
 
 import 'package:colireli_delivery/Constants/Constants.dart';
 import 'package:colireli_delivery/Controller/ColiCntroller.dart';
+import 'package:colireli_delivery/Models/Colis.dart';
+import 'package:colireli_delivery/Models/Driver_fees.dart';
 import 'package:colireli_delivery/Models/Mission.dart';
 import 'package:colireli_delivery/Models/Payments.dart';
 import 'package:colireli_delivery/Models/Reasons.dart';
@@ -70,7 +72,7 @@ class AuthRepo {
     var res = await http.post(Uri.parse(mainRepo+'/api/createMission'),
         headers: {
           'Accept': 'application/json;charset=UTF-8',
-          'token': token,
+          'Authorization': ' Bearer '+token,
         },
         body: {"checked_ids" : idss.toString(),}
 
@@ -112,7 +114,7 @@ class AuthRepo {
     var res = await http.post(Uri.parse(mainRepo+'/api/outToDeliver'),
         headers: {
           'Accept': 'application/json;charset=UTF-8',
-          'token': token,
+          'Authorization': ' Bearer '+token,
         },
         body: {"mission" : idMission,
                "shipments" :  idShipments,
@@ -154,7 +156,7 @@ class AuthRepo {
 
     var res = await http.get(Uri.parse(mainRepo+'/api/getShipment?code='+code),
       headers: {
-      'token': token,
+      'Authorization': ' Bearer '+token,
 
       },
     );
@@ -165,8 +167,8 @@ class AuthRepo {
     var json = jsonDecode(res.body)['data'];
     if(res.statusCode == 200 && success == true ){
       print(json);
-      var coli = Coli.fromJson(json);
-      print(coli.reciverName.toString());
+      var coli = Data.fromJson(json);
+      print(coli.area!.name!.toString());
 
 
 
@@ -184,16 +186,19 @@ class AuthRepo {
 
     var pref = await  SharedPreferences.getInstance();
     late String token = pref.getString('token')!;
+    print('TokenUSer: '+token);
 
     var res = await http.get(Uri.parse(mainRepo+'/api/v1/auth/getUser'),
       headers: {
         'Accept': 'application/json;charset=UTF-8',
-        'token': token,
+        'Authorization': ' Bearer '+token,
 
       },
     );
+    var success = jsonDecode(res.body)['success'];
+    print(res.body);
 
-   if(res.statusCode ==200){
+   if(res.statusCode ==200 && success == true){
 
      print('status : ${res.statusCode}');
     var json = jsonDecode(res.body)['user'];
@@ -201,7 +206,8 @@ class AuthRepo {
         user = User.fromJson(json);
         return user;
     }else{
-     throw Exception('Failed to get data');
+     var msg = jsonDecode(res.body)['message'];
+     throw Exception(msg);
 
    }
 
@@ -214,19 +220,24 @@ class AuthRepo {
     var res = await http.get(Uri.parse(mainRepo+'/api/getShipment?code='+code),
       headers: {
         'Accept': 'application/json;charset=UTF-8',
-        'token': token,
+        'Authorization': ' Bearer '+token,
 
       },
     );
-    if(res.statusCode ==200){
+    var json = jsonDecode(res.body)['data'];
+    var success = jsonDecode(res.body)['status'];
+    var msg = jsonDecode(res.body)['msg'];
+    if(res.statusCode ==200&& success == true ){
 
       print('status : ${res.statusCode}');
-      var json = jsonDecode(res.body)['data'];
+
       print (json.toString());
        var coli = Coli.fromJson(json);
       return coli;
     }else{
-      throw Exception('Failed to get data');
+      Get.snackbar("Error", msg,duration: Duration(seconds: 2),
+          backgroundColor: Colors.red,colorText: Colors.white,snackPosition: SnackPosition.BOTTOM,margin: EdgeInsets.only(bottom: 20,left: 20,right: 20));
+
 
     }
   }
@@ -238,7 +249,7 @@ class AuthRepo {
     var res = await http.get(Uri.parse(mainRepo+'/api/getMissionShipments?mission_id='+idMission.toString()),
       headers: {
         'Accept': 'application/json;charset=UTF-8',
-        'token': token,
+        'Authorization': ' Bearer '+token,
 
       },
     );
@@ -272,7 +283,7 @@ class AuthRepo {
     var res = await http.get(Uri.parse(mainRepo+'/api/getShipmentsByStatus?mission=$idmission&status=20'),
       headers: {
         'Accept': 'application/json;charset=UTF-8',
-        'token': token,
+        'Authorization': ' Bearer '+token,
 
       },
     ).timeout(Duration(seconds: 30),onTimeout: (){
@@ -280,13 +291,13 @@ class AuthRepo {
     }
     );
     var success = jsonDecode(res.body)['success'];
-    var msg = jsonDecode(res.body)['message'];
+
     if(res.statusCode ==200 && success == true){
 
       print('status : ${res.statusCode}');
-      var json = jsonDecode(res.body)['data']as List;
+      var json = jsonDecode(res.body)['data'] as List;
       print (json.toString());
-      var colis = json.map((coli) => Coli.fromJson(coli)).toList();
+      var colis = json.map((coli) => Data.fromJson(coli)).toList();
       print(colis);
 
       return colis;
@@ -305,7 +316,7 @@ class AuthRepo {
     var res = await http.post(Uri.parse(mainRepo+'/api/admin/shipments/delivered'),
         headers: {
           'Accept': 'application/json;charset=UTF-8',
-          'token': token,
+          'Authorization': ' Bearer '+token,
         },
         body: {"mission" : idMission,
           "shipment" :  idShipments,
@@ -351,7 +362,7 @@ class AuthRepo {
     var res = await http.get(Uri.parse(mainRepo+'/api/getShipmentsByStatus?mission=$idmission&status=9'),
       headers: {
         'Accept': 'application/json;charset=UTF-8',
-        'token': token,
+        'Authorization': ' Bearer '+token,
 
       },
     ).timeout(Duration(seconds: 30),onTimeout: (){
@@ -365,7 +376,7 @@ class AuthRepo {
       print('status : ${res.statusCode}');
       var json = jsonDecode(res.body)['data']as List;
       print (json.toString());
-      var colis = json.map((coli) => Coli.fromJson(coli)).toList();
+      var colis = json.map((coli) => Data.fromJson(coli)).toList();
       print(colis);
       return colis;
     }else{
@@ -387,7 +398,7 @@ class AuthRepo {
     var res = await http.get(Uri.parse(mainRepo+'/api/calculate_mission_fee/$idmission'),
       headers: {
         'Accept': 'application/json;charset=UTF-8',
-        'token': token,
+        'Authorization': ' Bearer '+token,
 
       },
     ).timeout(Duration(seconds: 30),onTimeout: (){
@@ -427,7 +438,7 @@ class AuthRepo {
     var res = await http.get(Uri.parse(mainRepo+'/api/calculate_mission_fee/$idmission'),
       headers: {
         'Accept': 'application/json;charset=UTF-8',
-        'token': token,
+        'Authorization': ' Bearer '+token,
 
       },
     ).timeout(Duration(seconds: 30),onTimeout: (){
@@ -460,7 +471,7 @@ class AuthRepo {
     var res = await http.get(Uri.parse(mainRepo+'/api/getReasons'),
       headers: {
         'Accept': 'application/json;charset=UTF-8',
-        'token': token,
+        'Authorization': ' Bearer '+token,
 
       },
     ).timeout(Duration(seconds: 30),onTimeout: (){
@@ -497,7 +508,7 @@ class AuthRepo {
     var res = await http.get(Uri.parse(mainRepo+'/api/getShipmentsByStatus?mission=$idmission&status=17'),
       headers: {
         'Accept': 'application/json;charset=UTF-8',
-        'token': token,
+        'Authorization': ' Bearer '+token,
 
       },
     ).timeout(Duration(seconds: 30),onTimeout: (){
@@ -511,7 +522,7 @@ class AuthRepo {
       print('status : ${res.statusCode}');
       var json = jsonDecode(res.body)['data']as List;
       print (json.toString());
-      var colis = json.map((coli) => Coli.fromJson(coli)).toList();
+      var colis = json.map((coli) => Data.fromJson(coli)).toList();
       print(colis);
       return colis;
     }else{
@@ -528,12 +539,12 @@ class AuthRepo {
     var res = await http.post(Uri.parse(mainRepo+'/api/admin/shipments/return'),
         headers: {
           'Accept': 'application/json;charset=UTF-8',
-          'token': token,
+          'Authorization': ' Bearer '+token,
         },
         body: {"mission_id" : idMission,
           "shipment_id" :  idShipments,
           "reason_id" : reasonId,
-          "reason_description": "",
+          "is_alert": "1",
         }
 
     ).timeout(Duration(seconds: 30),onTimeout: (){
@@ -576,7 +587,7 @@ class AuthRepo {
     var res = await http.get(Uri.parse(mainRepo+'/api/getShipmentsByStatus?mission=$idmission&status=8'),
       headers: {
         'Accept': 'application/json;charset=UTF-8',
-        'token': token,
+        'Authorization': ' Bearer '+token,
 
       },
     ).timeout(Duration(seconds: 30),onTimeout: (){
@@ -590,7 +601,7 @@ class AuthRepo {
       print('status : ${res.statusCode}');
       var json = jsonDecode(res.body)['data']as List;
       print (json.toString());
-      var colis = json.map((coli) => Coli.fromJson(coli)).toList();
+      var colis = json.map((coli) => Data.fromJson(coli)).toList();
       print(colis);
       return colis;
     }else{
@@ -607,7 +618,7 @@ class AuthRepo {
     var res = await http.post(Uri.parse(mainRepo+'/api/admin/shipments/restoreshipment'),
         headers: {
           'Accept': 'application/json;charset=UTF-8',
-          'token': token,
+          'Authorization': ' Bearer '+token,
         },
         body: {"mission_id" : idMission,
           "shipment_id" :  idShipments,
@@ -639,6 +650,114 @@ class AuthRepo {
 
       return false ;
     }
+
+  }
+
+  Future<bool> EditMission(String codeShipment)async{
+    var pref = await  SharedPreferences.getInstance();
+    late String token = pref.getString('token')!;
+
+       late String idmission =  pref.getString("idmission")!;
+    var res = await http.post(Uri.parse(mainRepo+'/api/admin/addShipmentToMission'),
+        headers: {
+          'Accept': 'application/json;charset=UTF-8',
+          'Authorization': ' Bearer '+token,
+        },
+        body: {"mission" : idmission,
+          "shipment" :  codeShipment,
+        }
+
+    ).timeout(Duration(seconds: 30),onTimeout: (){
+      return new http.Response(jsonDecode("Time Out"), 500);
+    }
+    );
+
+    print(res.statusCode);
+    print(codeShipment);
+    print(idmission);
+
+    print('mybody'+ res.body);
+    var success = jsonDecode(res.body)['status'];
+    print(success.toString());
+    var msg = jsonDecode(res.body)['message'];
+
+    if(res.statusCode == 200 && success == true   ){
+
+
+      Get.snackbar("Success",msg,duration: Duration(seconds: 2),
+          backgroundColor: Colors.green,colorText: Colors.white,snackPosition: SnackPosition.BOTTOM,margin: EdgeInsets.only(bottom: 20,left: 20,right: 20));
+
+
+      return true;
+
+
+    }else{
+      Get.snackbar("error",msg,duration: Duration(seconds: 2),
+          backgroundColor: Colors.red,colorText: Colors.white,snackPosition: SnackPosition.BOTTOM,margin: EdgeInsets.only(bottom: 20,left: 20,right: 20));
+      return false ;
+    }
+
+  }
+  getDeliveryFeePrices()async{
+    var pref = await  SharedPreferences.getInstance();
+    late String token = pref.getString('token')!;
+    String idMission = pref.getString('idmission')!;
+    var res = await http.get(Uri.parse(mainRepo+'/api/getDriverRates'),
+      headers: {
+        'Accept': 'application/json;charset=UTF-8',
+        'Authorization': ' Bearer '+token,
+
+      },
+    );
+
+    var msg = jsonDecode(res.body)['msg'];
+    print(res.body);
+    var status = jsonDecode(res.body)['success'];
+    if(res.statusCode ==200 && status == true){
+
+      print('status : ${res.statusCode}');
+      var json = jsonDecode(res.body)['driver_fees']as List;
+      print (json.toString());
+      var colis = json.map((coli) => DriverFees.fromJson(coli)).toList();
+      print(colis);
+      return colis;
+    }else{
+
+      Get.snackbar("Error", msg,duration: Duration(seconds: 2),
+          backgroundColor: Colors.red,colorText: Colors.white,snackPosition: SnackPosition.BOTTOM,margin: EdgeInsets.only(bottom: 20,left: 20,right: 20));
+    }
+
+
+  }
+  getDeliveryDEfaultFeePrices()async{
+    var pref = await  SharedPreferences.getInstance();
+    late String token = pref.getString('token')!;
+    String idMission = pref.getString('idmission')!;
+    var res = await http.get(Uri.parse(mainRepo+'/api/getDriverRates'),
+      headers: {
+        'Accept': 'application/json;charset=UTF-8',
+        'Authorization': ' Bearer '+token,
+
+      },
+    );
+
+    var msg = jsonDecode(res.body)['msg'];
+    print(res.body);
+    var status = jsonDecode(res.body)['success'];
+    if(res.statusCode ==200 && status == true){
+
+      print('status : ${res.statusCode}');
+      var json = jsonDecode(res.body)['default_driver_fee'];
+      print (json.toString());
+      var colis = DefaultDriverFee.fromJson(json);
+      print(colis);
+      return colis;
+    }else{
+
+      Get.snackbar("Error", msg,duration: Duration(seconds: 2),
+          backgroundColor: Colors.red,colorText: Colors.white,snackPosition: SnackPosition.BOTTOM,margin: EdgeInsets.only(bottom: 20,left: 20,right: 20));
+    }
+
 
   }
 

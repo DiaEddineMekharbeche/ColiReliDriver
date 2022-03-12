@@ -388,7 +388,8 @@ class _FailedAttempsDetailsState extends State<FailedAttempsDetails> {
                                 children: [
                                   Text(
                                     'To: ' .tr+
-                                        controller.listFailedAttempt[index!].reciverAddress!
+                                        controller.listFailedAttempt[index!].state!.name!+","+
+                                        controller.listFailedAttempt[index!].area!.name!
                                             .toUpperCase(),
 
                                     style: TextStyle(

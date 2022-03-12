@@ -229,7 +229,7 @@ class _ColiScannedState extends State<ColiScanned> {
                                       child: Container(
                                         width: size.width / 4.0,
                                         child: Text(
-                                          controller.allColis[i].reciverAddress!
+                                          controller.allColis[i].state!.name!+","+controller.allColis[i].area!.name!
                                               .toUpperCase(),
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
@@ -259,7 +259,7 @@ class _ColiScannedState extends State<ColiScanned> {
                                       padding: const EdgeInsets.only(left: 5),
                                       child: Text(
                                         (controller.allColis[i]
-                                                    .amountToBeCollected!)
+                                            .amountToBeCollected!)
                                                 .toString() +
                                             ',00 DA',
                                         style: TextStyle(

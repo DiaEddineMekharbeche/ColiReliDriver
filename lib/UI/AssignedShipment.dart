@@ -90,7 +90,7 @@ class _AssignedShipmentState extends State<AssignedShipment> {
                   setState(() {
                     controller.postOutOfDElivery(_selectedItems.toString(),
                         controller.ListAssignedShipment[0].missionId!.toString());
-                    print(controller.ListAssignedShipment[0].missionId);
+                    print(controller.ListAssignedShipment[0].missionId!);
                     _selectedItems.clear();
                     controller.getOutofDeliveryShipments();
                     Get.offAll(()=>home(),duration: Duration(seconds: 1));
@@ -209,8 +209,8 @@ class _AssignedShipmentState extends State<AssignedShipment> {
                                     child: Container(
                                       width: size.width / 4.0,
                                       child: Text(
-                                        controller.ListAssignedShipment[i]
-                                            .reciverAddress!
+                                        controller.ListAssignedShipment[i].state!.name!+","+
+                                            controller.ListAssignedShipment[i].area!.name!
                                             .toUpperCase(),
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
@@ -241,8 +241,8 @@ class _AssignedShipmentState extends State<AssignedShipment> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 5),
                                     child: Text(
-                                      (controller.ListAssignedShipment[i]
-                                          .amountToBeCollected!).toString() +
+                                      (controller.ListAssignedShipment[i].
+                                          amountToBeCollected!).toString() +
                                           ' DA',
                                       style: TextStyle(
                                         color: Colors.red,

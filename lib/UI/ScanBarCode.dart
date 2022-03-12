@@ -152,7 +152,8 @@ class _ScanBarCodeState extends State<ScanBarCode> {
                                                   width: size.width / 2.5,
                                                   child: Text(
                                                     controller
-                                                        .allColis[0].reciverAddress!
+                                                        .allColis[0].state!.name!+","+
+                                                      controller.allColis[0].area!.name!
                                                         .toUpperCase(),
                                                     overflow: TextOverflow.ellipsis,
                                                     style: TextStyle(
@@ -184,7 +185,7 @@ class _ScanBarCodeState extends State<ScanBarCode> {
                                                 const EdgeInsets.only(left: 5),
                                                 child: Text(
                                                   (controller.allColis[0]
-                                                      .amountToBeCollected!).toString() +
+                                                     .amountToBeCollected!).toString() +
                                                       ' DA',
                                                   style: TextStyle(
                                                     color: Colors.red,
@@ -309,7 +310,9 @@ class _ScanBarCodeState extends State<ScanBarCode> {
                                                   child: Text(
                                                     'To: ' +
                                                         controller.allColis[0]
-                                                            .reciverAddress!
+                                                            .state!.name!+","+
+                                                      controller.allColis[0].area!.name!
+
                                                             .toUpperCase(),
                                                     overflow: TextOverflow.ellipsis,
                                                     style: TextStyle(

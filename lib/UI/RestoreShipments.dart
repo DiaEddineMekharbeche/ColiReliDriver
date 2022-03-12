@@ -215,7 +215,7 @@ class _RestoreShipmentsState extends State<RestoreShipments> {
                                       width: size.width / 4.0,
                                       child: Text(
                                         controller.listFailedAttempt[i]
-                                            .reciverAddress!
+                                            .state!.name!+","+controller.listFailedAttempt[i].area!.name!
                                             .toUpperCase(),
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(

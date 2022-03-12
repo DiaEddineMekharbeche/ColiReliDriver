@@ -387,7 +387,9 @@ class _DeliveredShipmentDetailsState extends State<DeliveredShipmentDetails> {
                                 children: [
                                   Text(
                                     'To: ' .tr+
-                                        controller.lisDeliveredColi[index!].reciverAddress!
+                                        controller.lisDeliveredColi[index!].state!.name!.toUpperCase()+","+
+                                         controller.lisDeliveredColi[index!].area!.name!.toUpperCase()+" , "+
+                                         controller.lisDeliveredColi[index!].reciverAddress!
                                             .toUpperCase(),
 
                                     style: TextStyle(

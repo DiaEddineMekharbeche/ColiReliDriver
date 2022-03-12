@@ -1,71 +1,94 @@
-class Coli {
+class Colis {
+  bool? success;
+  String? message;
+  Data? data;
+
+  Colis({this.success, this.data,this.message});
+
+  Colis.fromJson(Map<String, dynamic> json) {
+    success = json['success'];
+    message = json['message'];
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['success'] = this.success;
+    if (this.data != null) {
+      data['data'] = this.data!.toJson();
+    }
+    return data;
+  }
+}
+
+class Data {
   int? id;
   String? code;
   int? statusId;
+  int? paymentStatus;
   String? type;
   int? branchId;
-  int? payment_status;
   String? shippingDate;
   int? clientId;
-  String?  clientAddress;
-  int?  paymentType;
-  int?  paid;
-  String?  paymentIntegrationId;
-  int?  paymentMethodId;
-  int?  tax;
-  int?  insurance;
-  String?  deliveryTime;
-  int?  shippingCost;
-  int?  totalWeight;
-  int?  employeeUserId;
-  String?  clientStreetAddressMap;
-  String?  clientLat;
-  String?  clientLng;
-  String?  clientUrl;
-  String?  reciverStreetAddressMap;
-  String?  reciverLat;
-  String?  reciverLng;
-  String?  reciverUrl;
-  String?  attachmentsBeforeShipping;
-  String?  attachmentsAfterShipping;
-  String?  clientPhone;
-  String?  reciverPhone;
-  int?  otp;
-  String?  createdAt;
-  String?  updatedAt;
-  String?  reciverName;
-  String?  reciverAddress;
-  int?  missionId;
-  int?  captainId;
-  int?  returnCost;
-  int?  fromCountryId;
-  int?  fromStateId;
-  int?  fromAreaId;
-  int?  toCountryId;
-  int?  toStateId;
-  int?   toAreaId;
-  int?  prevBranch;
-  int?  clientStatus;
-  int?  amountToBeCollected;
-  String?  orderId;
-  String?  barcode;
-  int?  containerId;
-
-  int? reportDriverid;
-  int? reportShipmentid;
-  int? clientReportid;
-  Pay?  pay;
-  FromAddress?  fromAddress;
-  ToState? toState;
-  ToArea? toArea;
+  String? clientAddress;
+  int? paymentType;
+  int? paid;
   bool? isSelected = false;
-  int? from_branch_id ;
-  int? to_branch_id;
+  int? paymentIntegrationId;
+  int? paymentMethodId;
+  int? tax;
+  int? insurance;
+  String? deliveryTime;
+  int? shippingCost;
+  int? totalWeight;
+  int? employeeUserId;
+  String? clientStreetAddressMap;
+  String? clientLat;
+  String? clientLng;
+  String? clientUrl;
+  String? reciverStreetAddressMap;
+  String? reciverLat;
+  String? reciverLng;
+  String? reciverUrl;
+  String? attachmentsBeforeShipping;
+  String? attachmentsAfterShipping;
+  String? clientPhone;
+  String? reciverPhone;
+  int? otp;
+  String? createdAt;
+  String? updatedAt;
+  String? reciverName;
+  String? reciverAddress;
+  int? missionId;
+  int? captainId;
+  int? returnCost;
+  int? fromCountryId;
+  int? fromStateId;
+  int? fromAreaId;
+  int? toCountryId;
+  int? toStateId;
+  int? toAreaId;
+  int? prevBranch;
+  int? fromBranchId;
+  int? toBranchId;
+  int? clientStatus;
+  int? amountToBeCollected;
+  String? orderId;
+  String? barcode;
+  int? containerId;
+  int? reportDriverId;
+  int? reportShipmentId;
+  int? clientReportId;
+  Pay? pay;
+  FromAddress? fromAddress;
+  State? state;
+  State? area;
 
-  Coli(
+  Data(
       {this.id,
         this.code,
         this.statusId,
+        this.paymentStatus,
         this.type,
         this.branchId,
         this.shippingDate,
@@ -108,24 +131,26 @@ class Coli {
         this.toStateId,
         this.toAreaId,
         this.prevBranch,
+        this.fromBranchId,
+        this.toBranchId,
         this.clientStatus,
         this.amountToBeCollected,
         this.orderId,
         this.barcode,
         this.containerId,
+        this.reportDriverId,
+        this.reportShipmentId,
+        this.clientReportId,
         this.pay,
         this.fromAddress,
-      this.reportDriverid,
-      this.reportShipmentid,
-        this.to_branch_id,
-        this.from_branch_id,
+        this.state,
+        this.area});
 
-      });
-
-  Coli.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     code = json['code'];
     statusId = json['status_id'];
+    paymentStatus = json['payment_status'];
     type = json['type'];
     branchId = json['branch_id'];
     shippingDate = json['shipping_date'];
@@ -168,25 +193,22 @@ class Coli {
     toStateId = json['to_state_id'];
     toAreaId = json['to_area_id'];
     prevBranch = json['prev_branch'];
+    fromBranchId = json['from_branch_id'];
+    toBranchId = json['to_branch_id'];
     clientStatus = json['client_status'];
     amountToBeCollected = json['amount_to_be_collected'];
     orderId = json['order_id'];
     barcode = json['barcode'];
-    from_branch_id = json['from_branch_id'];
-    to_branch_id = json['to_branch_id'];
     containerId = json['container_id'];
-    reportShipmentid = json['reportShipment_id'];
-    reportDriverid = json['reportDriver_id'];
-    clientReportid = json['clientReport_id'];
+    reportDriverId = json['reportDriver_id'];
+    reportShipmentId = json['reportShipment_id'];
+    clientReportId = json['clientReport_id'];
     pay = json['pay'] != null ? new Pay.fromJson(json['pay']) : null;
     fromAddress = json['from_address'] != null
         ? new FromAddress.fromJson(json['from_address'])
         : null;
-    toState = json['to_state'] != null
-        ? new ToState.fromJson(json['to_state'])
-        : null;
-    toArea =
-    json['to_area'] != null ? new ToArea.fromJson(json['to_area']) : null;
+    state = json['state'] != null ? new State.fromJson(json['state']) : null;
+    area = json['area'] != null ? new State.fromJson(json['area']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -194,6 +216,7 @@ class Coli {
     data['id'] = this.id;
     data['code'] = this.code;
     data['status_id'] = this.statusId;
+    data['payment_status'] = this.paymentStatus;
     data['type'] = this.type;
     data['branch_id'] = this.branchId;
     data['shipping_date'] = this.shippingDate;
@@ -236,36 +259,41 @@ class Coli {
     data['to_state_id'] = this.toStateId;
     data['to_area_id'] = this.toAreaId;
     data['prev_branch'] = this.prevBranch;
+    data['from_branch_id'] = this.fromBranchId;
+    data['to_branch_id'] = this.toBranchId;
     data['client_status'] = this.clientStatus;
     data['amount_to_be_collected'] = this.amountToBeCollected;
     data['order_id'] = this.orderId;
     data['barcode'] = this.barcode;
     data['container_id'] = this.containerId;
+    data['reportDriver_id'] = this.reportDriverId;
+    data['reportShipment_id'] = this.reportShipmentId;
+    data['clientReport_id'] = this.clientReportId;
     if (this.pay != null) {
       data['pay'] = this.pay!.toJson();
     }
     if (this.fromAddress != null) {
       data['from_address'] = this.fromAddress!.toJson();
     }
-    if (this.toState != null) {
-      data['to_state'] = this.toState!.toJson();
+    if (this.state != null) {
+      data['state'] = this.state!.toJson();
     }
-    if (this.toArea != null) {
-      data['to_area'] = this.toArea!.toJson();
+    if (this.area != null) {
+      data['area'] = this.area!.toJson();
     }
     return data;
   }
 }
 
 class Pay {
-  int?  id;
-  String?  type;
-  String?  value;
-  String?  key;
-  String?  lang;
-  String?  name;
-  String?  createdAt;
-  String?  updatedAt;
+  int? id;
+  String? type;
+  String? value;
+  String? key;
+  Null? lang;
+  String? name;
+  String? createdAt;
+  String? updatedAt;
 
   Pay(
       {this.id,
@@ -303,18 +331,18 @@ class Pay {
 }
 
 class FromAddress {
-  int?  id;
-  int?  clientId;
-  String?  address;
-  int?  countryId;
-  int?  stateId;
-  int?  areaId;
-  String?  clientStreetAddressMap;
-  String?  clientLat;
-  String?  clientLng;
-  String?  clientUrl;
-  String?  createdAt;
-  String?  updatedAt;
+  int? id;
+  int? clientId;
+  String? address;
+  int? countryId;
+  int? stateId;
+  int? areaId;
+  Null? clientStreetAddressMap;
+  Null? clientLat;
+  Null? clientLng;
+  Null? clientUrl;
+  String? createdAt;
+  String? updatedAt;
 
   FromAddress(
       {this.id,
@@ -345,10 +373,6 @@ class FromAddress {
     updatedAt = json['updated_at'];
   }
 
-
-
-
-
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
@@ -365,106 +389,23 @@ class FromAddress {
     data['updated_at'] = this.updatedAt;
     return data;
   }
-
-
 }
-class ToState {
+
+class State {
   int? id;
   String? name;
-  String? countryId;
-  String? countryCode;
-  String? fipsCode;
-  String? iso2;
-  String? latitude;
-  String? longitude;
-  String? createdAt;
-  String? updatedAt;
-  String? flag;
-  String? wikiDataId;
-  String? covered;
 
-  ToState(
-      {this.id,
-        this.name,
-        this.countryId,
-        this.countryCode,
-        this.fipsCode,
-        this.iso2,
-        this.latitude,
-        this.longitude,
-        this.createdAt,
-        this.updatedAt,
-        this.flag,
-        this.wikiDataId,
-        this.covered});
+  State({this.id, this.name});
 
-  ToState.fromJson(Map<String, dynamic> json) {
+  State.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    countryId = json['country_id'];
-    countryCode = json['country_code'];
-    fipsCode = json['fips_code'];
-    iso2 = json['iso2'];
-    latitude = json['latitude'];
-    longitude = json['longitude'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    flag = json['flag'];
-    wikiDataId = json['wikiDataId'];
-    covered = json['covered'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
-    data['country_id'] = this.countryId;
-    data['country_code'] = this.countryCode;
-    data['fips_code'] = this.fipsCode;
-    data['iso2'] = this.iso2;
-    data['latitude'] = this.latitude;
-    data['longitude'] = this.longitude;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['flag'] = this.flag;
-    data['wikiDataId'] = this.wikiDataId;
-    data['covered'] = this.covered;
-    return data;
-  }
-}
-class ToArea {
-  int? id;
-  String? stateId;
-  String? name;
-  String? covered;
-  String? createdAt;
-  String? updatedAt;
-
-  ToArea(
-      {this.id,
-        this.stateId,
-        this.name,
-        this.covered,
-        this.createdAt,
-        this.updatedAt});
-
-  ToArea.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    stateId = json['state_id'];
-    name = json['name'];
-    covered = json['covered'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['state_id'] = this.stateId;
-    data['name'] = this.name;
-    data['covered'] = this.covered;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
     return data;
   }
 }

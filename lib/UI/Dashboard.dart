@@ -13,6 +13,8 @@ import 'package:colireli_delivery/UI/RestoreShipments.dart';
 import 'package:colireli_delivery/UI/Shipment_Card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 
@@ -34,7 +36,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
   final controller = Get.put(ColiController());
   int index =0  ;
   List<String> _selectedItems = [];
-
+  String? scanResult ;
 
   var scanResultss;
   bool isScanned = true;
@@ -92,8 +94,11 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
               child: Icon (Icons.edit_outlined,size: 25,color: Colors.white,),
               backgroundColor: Colors.blue,
               labelBackgroundColor: Colors.white,
-              label: 'Edit mission'.tr,
-            )
+              label: 'Add Shipment'.tr,
+              onTap: (){
+                scanBarcode();
+              }
+            ),
 
           ],
           heroTag: 'btn1',
@@ -585,7 +590,7 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                                           Padding(
                                             padding:
                                                 const EdgeInsets.only(left: 5),
-                                            child: Text(controller.listColi[i].code!,
+                                            child: Text(controller.listColi[i].code! ,
                                               style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 12,
@@ -621,7 +626,8 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                                                 width: size.width / 4.0,
 
                                                 child: Text(
-                                                  controller.listColi[i].reciverAddress!
+                                                  controller.listColi[i].state!.name! +","+
+                                                    controller.listColi[i].area!.name!
                                                       .toUpperCase(),
 
                                                   overflow: TextOverflow.ellipsis,
@@ -795,7 +801,9 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                                             width: size.width / 1.2,
                                             child: Text(
                                               'To: '.tr +
-                                                  controller.listColi[i] .reciverAddress!
+                                                  controller.listColi[i].state!.name!.toUpperCase()+" , "+
+                                                controller.listColi[i].area!.name!.toUpperCase()+ " , "+
+                                                controller.listColi[i].reciverAddress!
                                                       .toUpperCase(),
 
                                               overflow: TextOverflow.ellipsis,
@@ -859,9 +867,9 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
   }
 
    openDialog() => Get.defaultDialog(
-     title: controller.allColis[1].code ?? '',
+     title: controller.allColis[1].code!,
      titleStyle: TextStyle(fontSize: 25),
-     middleText: controller.allColis[1].reciverAddress ?? '',
+     middleText: controller.allColis[1].area!.name!,
      middleTextStyle: TextStyle(fontSize: 20),
      backgroundColor: Colors.white,
      radius: 80,
@@ -977,7 +985,9 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                                             child: Container(
                                               width: size.width / 4.0,
                                               child: Text(
-                                                controller.lisDeliveredColi[i].reciverAddress!
+                                                controller.lisDeliveredColi[i].state!.name!.toUpperCase()+" , "+
+                                                controller.lisDeliveredColi[i].area!.name!.toUpperCase() +" , "+
+                                                  controller.lisDeliveredColi[i].reciverAddress!
                                                     .toUpperCase(),
 
                                                 overflow: TextOverflow.ellipsis,
@@ -1146,7 +1156,8 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                                               width: size.width / 1.2,
                                               child: Text(
                                                 'To: '.tr +
-                                                    controller.lisDeliveredColi[i] .reciverAddress!
+                                                    controller.lisDeliveredColi[i].state!.name!+","+
+                                                  controller.lisDeliveredColi[i].area!.name!
                                                         .toUpperCase(),
 
                                                 overflow: TextOverflow.ellipsis,
@@ -1337,7 +1348,8 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                                             child: Container(
                                               width: size.width / 4.0,
                                               child: Text(
-                                                controller.listFailedAttempt[i].reciverAddress!
+                                                controller.listFailedAttempt[i].state!.name!+","+
+                                                  controller.listFailedAttempt[i].area!.name!
                                                     .toUpperCase(),
 
                                                 overflow: TextOverflow.ellipsis,
@@ -1506,7 +1518,9 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
                                               width: size.width / 1.2,
                                               child: Text(
                                                 'To: '.tr +
-                                                    controller.listFailedAttempt[i] .reciverAddress!
+                                                    controller.listFailedAttempt[i].state!.name!.toUpperCase()+" , "+
+                                                  controller.listFailedAttempt[i].area!.name! +" , "+
+                                                  controller.listFailedAttempt[i].reciverAddress!.toUpperCase()
                                                         .toUpperCase(),
 
                                                 overflow: TextOverflow.ellipsis,
@@ -1537,6 +1551,60 @@ class _DashboardState extends State<Dashboard> with SingleTickerProviderStateMix
       );
 
   }
+  Future<void> scanBarcode() async{
 
+    try{
+
+      scanResult = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', "Cancel".tr, true, ScanMode.BARCODE);
+
+    }on PlatformException{
+      scanResult= 'Failed to get platform version.';
+    }
+
+    print(scanResult);
+    if(scanResult != "-1"){
+      openDialogEdit(scanResult!);
+    }else{
+      print(scanResult);
+    }
+
+
+
+
+  }
+
+
+  openDialogEdit(String code) => Get.defaultDialog(buttonColor: Colors.transparent,
+    title: 'Confirmation',
+    titleStyle: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black),
+    middleText: 'Are you sure to add this shipment to your mission ?'.tr+code,
+    middleTextStyle: TextStyle(fontSize: 14),
+    backgroundColor: Colors.white,
+    radius: 20,
+    textCancel: 'Cancel'.tr,
+    cancelTextColor: Colors.deepOrange,
+    barrierDismissible: true,
+    textConfirm: 'Confirm'.tr,
+    confirmTextColor: Colors.green,
+
+    onCancel: (){
+      Get.back();
+    },
+    onConfirm: () {
+      setState(() {
+
+        controller.EditMission(code);
+        Get.back();
+
+        // controller.getFailedAttempt();
+
+
+      });
+
+
+    },
+
+  );
 
 }

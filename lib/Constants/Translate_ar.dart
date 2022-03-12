@@ -85,7 +85,16 @@ const Map<String, String> ar = {
   'Available':'متوفرة',
   'Tracking Code:':'كود الطلبية:',
   'Status:':'الحالة:',
-  'Collected Amount:':'المبلغ الذي تم تجميعه:'
+  'Collected Amount:':'المبلغ الذي تم تجميعه:',
+  'Are you sure to add this shipment to your mission ?':'هل أنت متأكد من إضافة هذه الطلبية إلى مهمتك؟',
+  'Add Shipment':'إضافة طرد',
+  'Sender Number:':'رقم المرسل:',
+  'Delivery fee prices':'أسعار رسوم التوصيل',
+  'Area':'البلدية',
+  'Return Fees':'رسوم الإرجاع',
+  'Delivery Fees':'تكاليف التوصيل',
+  'Default Fees: ':'تكاليف التوصيل',
+  'All':'الكل',
 
 
 };

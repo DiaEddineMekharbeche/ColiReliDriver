@@ -402,7 +402,10 @@ class _ShipementCardState extends State<ShipementCard> {
                                 children: [
                                   Text(
                                     'To: '.tr +
-                                        controller.listColi[index!].reciverAddress!
+                                        controller.listColi[index!].state!.name!.toUpperCase()+" , "+
+                                    controller.listColi[index!].area!.name!.toUpperCase()+" , "+
+                                     controller.listColi[index!].reciverAddress!
+
                                             .toUpperCase(),
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
@@ -428,7 +431,7 @@ class _ShipementCardState extends State<ShipementCard> {
           Padding(
             padding: const EdgeInsets.only(left:20,right: 20 ,top: 10,bottom:10),
             child: Container(
-              height: size.height/6.0,
+              height: size.height/5.5,
               width: size.width,
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -505,6 +508,32 @@ class _ShipementCardState extends State<ShipementCard> {
                               fontSize: 12,color: Colors.black,
                               fontWeight: FontWeight.bold
                           ),),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      color: Colors.grey.withOpacity(0.08),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Sender Number:'.tr,style: TextStyle(
+                              fontSize: 12,color: Colors.black
+                          ),),
+                          InkWell(
+                            onTap: () {
+                             _makePhoneCall(controller.listColi[index!].clientPhone!);
+                            },
+                            child: Text(controller.listColi[index!].clientPhone!,style: TextStyle(
+                                fontSize: 12,color: Colors.black,
+                                fontWeight: FontWeight.bold
+                            ),
+
+
+                            ),
+                          ),
                         ],
                       ),
                     ),

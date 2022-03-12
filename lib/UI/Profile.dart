@@ -3,6 +3,7 @@
 
 import 'package:colireli_delivery/Constants/Constants.dart';
 import 'package:colireli_delivery/Controller/ColiCntroller.dart';
+import 'package:colireli_delivery/UI/DeliveryFeePrices.dart';
 import 'package:colireli_delivery/UI/InformationDeatils.dart';
 import 'package:colireli_delivery/UI/LoginUi.dart';
 import 'package:flutter/cupertino.dart';
@@ -284,9 +285,12 @@ class _ProfileState extends State<Profile> {
                                 ),
                           InkWell(
                             onTap: () {
-                            //  Get.to(()=>UserInfo() , transition: Transition.leftToRight,
+                              Get.to(()=>DeliveryFeePrices() ,
 
-                              //);
+
+                              );
+                              controller.getDeliveryFeesPricesController();
+                              controller.getDeliveryDefaultFeesPricesController();
                             },
                                child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -302,7 +306,7 @@ class _ProfileState extends State<Profile> {
 
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text('Billing Details'.tr,style: TextStyle(
+                                        Text('Delivery fee prices'.tr,style: TextStyle(
                                             fontWeight: FontWeight.bold,fontSize: 14
                                         ),),
                                         Padding(

@@ -428,7 +428,8 @@ class _StatsState extends State<Stats> {
                                           child: Container(
                                             width: size.width / 4,
                                             child: Text(
-                                              controller.lisDeliveredColi[i].reciverAddress!
+                                              controller.lisDeliveredColi[i].state!.name!+","+
+                                                controller.lisDeliveredColi[i].area!.name!
                                                   .toUpperCase(),
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(

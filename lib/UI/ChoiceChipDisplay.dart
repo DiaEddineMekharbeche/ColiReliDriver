@@ -4,6 +4,7 @@
 import 'package:colireli_delivery/Constants/Constants.dart';
 import 'package:colireli_delivery/Controller/ColiCntroller.dart';
 import 'package:colireli_delivery/Models/Reasons.dart';
+import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,9 +27,9 @@ class _ChoiceChipDisplayState extends State<ChoiceChipDisplay> {
  late String idReason="";
   late String missionID="";
   late String shipmentID ="";
+  var chipList2;
 
-
-  List<String> chipList = [
+  List<String> fakelist = [
     "receiver",
     "order",
     "sender\r\n",
@@ -42,6 +43,7 @@ class _ChoiceChipDisplayState extends State<ChoiceChipDisplay> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
+    var chipList = controller.reasonsList.where((i) => i.key == "receiver" ).toList();
 
     // TODO: implement build
     return
@@ -115,10 +117,10 @@ class _ChoiceChipDisplayState extends State<ChoiceChipDisplay> {
                             valueChoose = newValue.toString();
                           });
                         },
-                        items: chipList.map((valueItem) {
+                        items: fakelist.map((valueItem) {
                           return DropdownMenuItem(
                             value: valueItem,
-                            child: Text(valueItem),
+                            child: Text(valueItem.toString()),
                           );
                         }).toList(),
 
@@ -140,6 +142,7 @@ class _ChoiceChipDisplayState extends State<ChoiceChipDisplay> {
 
                     ],
                   )),
+
               Padding(
                 padding: const EdgeInsets.only(top:25.0),
                 child: Center(
@@ -228,18 +231,15 @@ class _choiceChipWidgetState extends State<choiceChipWidget> {
   Reasons selectedChoice = Reasons();
   String? valueChoose ;
 
-  List<String> chipList = [
-    "receiver",
-    "order",
-    "sender\r\n",
-  ];
+
 
 
   _buildChoiceList() {
 
     var size = MediaQuery.of(context).size;
     var choices = <Widget>[];
-    var receiverList=  controller.reasonsList.where((i) => i.key =='receiver'&& i.type == 'failed_attempt') .toList();
+    var receiverList=  controller.reasonsList.toList();
+
     print(receiverList.length);
 
     receiverList.forEach((item) {

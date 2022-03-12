@@ -85,6 +85,15 @@ const Map<String,String> fr ={
   'Status:':'Statut:',
   'Collected Amount:':'Montant collecté :',
   'DA ':'DA ',
+   'Are you sure to add this shipment to your mission ?':'Êtes-vous sûr d\'ajouter ce colis à votre mission ?',
+  'Add Shipment':'Ajouter un Colis',
+  'Sender Number:':'Numéro d\'expéditeur :',
+  'Delivery fee prices':'Tarifs des frais de livraison',
+  'Area':'Commune',
+  'Return Fees':'Frais de retour',
+  'Delivery Fees':'Frais de livraison',
+  'Default Fees: ':'Frais par défaut : ',
+  'All':'Toute',
 
 
 

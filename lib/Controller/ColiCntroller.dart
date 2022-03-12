@@ -3,12 +3,15 @@ import 'dart:convert';
 
 import 'package:colireli_delivery/Constants/Constants.dart';
 import 'package:colireli_delivery/Models/Coli.dart';
+import 'package:colireli_delivery/Models/Colis.dart';
 import 'package:colireli_delivery/Models/DeliveryUser.dart';
+import 'package:colireli_delivery/Models/Driver_fees.dart';
 import 'package:colireli_delivery/Models/Mission.dart';
 import 'package:colireli_delivery/Models/Payments.dart';
 import 'package:colireli_delivery/Models/Reasons.dart';
 
 import 'package:colireli_delivery/Repo_API/AuthRepo.dart';
+import 'package:colireli_delivery/UI/AssignedShipment.dart';
 import 'package:colireli_delivery/UI/Dashboard.dart';
 import 'package:colireli_delivery/UI/LoginUi.dart';
 
@@ -26,14 +29,16 @@ import 'LocalStorage.dart';
 
 
 class ColiController extends GetxController {
-  var allColis = <Coli>[].obs;
-  var listSortieren = <Coli>[].obs;
-  var listColi = <Coli>[].obs;
-  var lisDeliveredColi = <Coli>[].obs;
-  var ListAssignedShipment = <Coli>[].obs;
-  var listFailedAttempt = <Coli>[].obs;
+  var allColis = <Data>[].obs;
+  var listSortieren = <Data>[].obs;
+  var listColi = <Data>[].obs;
+  var lisDeliveredColi = <Data>[].obs;
+  var lisDeliveredFees = <DriverFees>[].obs;
+  var lisDeliveredDEfaultFees = <DefaultDriverFee>[].obs;
+  var ListAssignedShipment = <Data>[].obs;
+  var listFailedAttempt = <Data>[].obs;
   var listReports = <Rapport>[].obs;
-  var listColinew = <Coli>[];
+  var listColinew = <Data>[];
   var ListMission = <Mission>[].obs;
   var listids = <int>[].obs;
   var user = User().obs;
@@ -45,6 +50,8 @@ class ColiController extends GetxController {
   bool success = false;
   var shipments;
   var deliveredColi;
+  var deliveryFees;
+  var deliveryDefaultFees;
   var assignedColi;
   var failedAttempt;
   var paymentReport;
@@ -59,6 +66,8 @@ class ColiController extends GetxController {
   var isScan = true.obs;
   bool isScanned = false;
   var colis;
+  var defaultFess;
+  var defaultModelFess = DefaultDriverFee().obs;
   var mission;
   String? scanResult;
 
@@ -535,5 +544,68 @@ class ColiController extends GetxController {
     }
     update();
   }
+  EditMission(String _codeShipment) async {
+    try {
+      isLoading(true);
+      print('code shipment $_codeShipment');
+      success = await repo.EditMission(_codeShipment);
+      if (success == true) {
+        getAssignedShipmentController();
+        Get.to(()=>AssignedShipment());
+
+      }
+
+      print('ani postit');
+    } catch (e) {
+      throw Exception(e.toString());
+    } finally {
+      isLoading(false);
+    }
+  }
+  getDeliveryFeesPricesController() async {
+    try {
+      isLoading(true);
+
+      deliveryFees = await repo.getDeliveryFeePrices();
+
+      if (deliveryFees != null) {
+        //ListMission.addAll(mission);
+        lisDeliveredFees.value = deliveryFees;
+        // print(listColi.value.toString());
+        // allColis.add(colis);
+
+
+        print('array length :' + lisDeliveredFees.length.toString());
+      } else {
+        print("list Fees empty");
+      }
+    } catch (e) {
+
+
+    } finally {
+      isLoading(false);
+    }
+  }
+  getDeliveryDefaultFeesPricesController() async {
+    try {
+      isLoading(true);
+
+      deliveryDefaultFees = await repo.getDeliveryFeePrices();
+
+      if (deliveryDefaultFees != null) {
+        defaultModelFess.value = deliveryDefaultFees;
+      }
+
+
+
+    } catch (e) {
+
+
+    } finally {
+      isLoading(false);
+    }
+  }
+
+
 
 }
