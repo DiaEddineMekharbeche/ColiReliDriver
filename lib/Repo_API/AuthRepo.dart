@@ -5,6 +5,7 @@ import 'package:colireli_delivery/Constants/Constants.dart';
 import 'package:colireli_delivery/Controller/ColiCntroller.dart';
 import 'package:colireli_delivery/Models/Colis.dart';
 import 'package:colireli_delivery/Models/Driver_fees.dart';
+import 'package:colireli_delivery/Models/Keys.dart';
 import 'package:colireli_delivery/Models/Mission.dart';
 import 'package:colireli_delivery/Models/Payments.dart';
 import 'package:colireli_delivery/Models/Reasons.dart';
@@ -99,7 +100,7 @@ class AuthRepo {
 
 
     }else{
-      Get.snackbar("Error",jsonDecode(res.body)['message'],duration: Duration(seconds: 4),
+      Get.snackbar("Error",jsonDecode(res.body)['msg'],duration: Duration(seconds: 4),
           backgroundColor: Colors.red,colorText: Colors.white,snackPosition: SnackPosition.BOTTOM,margin: EdgeInsets.only(bottom: 20,left: 20,right: 20));
     }
 
@@ -291,6 +292,7 @@ class AuthRepo {
     }
     );
     var success = jsonDecode(res.body)['success'];
+    print(res.body);
 
     if(res.statusCode ==200 && success == true){
 
@@ -413,12 +415,20 @@ class AuthRepo {
       print(res.body);
       var json = jsonDecode(res.body)['rapport'];
       print (json.toString());
-      var rapports = Rapport.fromJson(json);
-      print(rapports);
-      Get.snackbar("information", message.toString(),duration: Duration(seconds: 2),
-          backgroundColor: Colors.green,colorText: Colors.white,snackPosition: SnackPosition.BOTTOM,margin: EdgeInsets.only(bottom: 20,left: 20,right: 20));
+      if(json != null){
+        var rapports = Rapport.fromJson(json);
+        print(rapports);
+        Get.snackbar("information", message.toString(),duration: Duration(seconds: 2),
+            backgroundColor: Colors.green,colorText: Colors.white,snackPosition: SnackPosition.BOTTOM,margin: EdgeInsets.only(bottom: 20,left: 20,right: 20));
 
-      return rapports;
+        return rapports;
+      }
+      print(message);
+      Get.snackbar("Information", message.toString(),duration: Duration(seconds: 2),
+          backgroundColor: ColiReliOrange,colorText: Colors.white,snackPosition: SnackPosition.BOTTOM,margin: EdgeInsets.only(bottom: 20,left: 20,right: 20));
+
+
+
     }else{
 
       print(message);
@@ -464,11 +474,11 @@ class AuthRepo {
 
 
   }
-  getReasons()async{
+  getReasons(String name , var lang)async{
     var pref = await  SharedPreferences.getInstance();
     late String token = pref.getString('token')!;
     String idmission = pref.getString('idmission')!;
-    var res = await http.get(Uri.parse(mainRepo+'/api/getReasons'),
+    var res = await http.get(Uri.parse(mainRepo+'/api/getReasons/'+name+'/'+lang),
       headers: {
         'Accept': 'application/json;charset=UTF-8',
         'Authorization': ' Bearer '+token,
@@ -488,6 +498,43 @@ class AuthRepo {
 
       print (json.toString());
       var rapports = json.map((rapport) => Reasons.fromJson(rapport)).toList();
+
+      return rapports;
+    }else{
+
+
+      Get.snackbar("Error", "Error Server",duration: Duration(seconds: 2),
+          backgroundColor: Colors.red,colorText: Colors.white,snackPosition: SnackPosition.BOTTOM,margin: EdgeInsets.only(bottom: 20,left: 20,right: 20));
+
+    }
+
+
+  }
+  getKeys( var lang)async{
+    var pref = await  SharedPreferences.getInstance();
+    late String token = pref.getString('token')!;
+    String idmission = pref.getString('idmission')!;
+    var res = await http.get(Uri.parse(mainRepo+'/api/getReasonsKeys/'+lang),
+      headers: {
+        'Accept': 'application/json;charset=UTF-8',
+        'Authorization': ' Bearer '+token,
+
+      },
+    ).timeout(Duration(seconds: 30),onTimeout: (){
+      return new http.Response(jsonDecode("Time Out"), 500);
+    }
+    );
+
+    var status = jsonDecode(res.body)['success'];
+    print('status12 : ${res.statusCode}');
+    if(res.statusCode ==200 && status == true){
+
+      print(res.body);
+      var json = jsonDecode(res.body)['reasons']as List;
+
+      print (json.toString());
+      var rapports = json.map((rapport) => Type.fromJson(rapport)).toList();
+      print(rapports[1].origin);
 
       return rapports;
     }else{
@@ -533,7 +580,39 @@ class AuthRepo {
 
 
   }
-  Future returnShipment(String idShipments,String idMission,String reasonId)async{
+  getAlertShipment()async{
+    var pref = await  SharedPreferences.getInstance();
+    late String token =  pref.getString('token')!;
+    String idmission =  pref.getString('idmission')!;
+    var res = await http.get(Uri.parse(mainRepo+'/api/getShipmentsByStatus?mission=$idmission&status=16'),
+      headers: {
+        'Accept': 'application/json;charset=UTF-8',
+        'Authorization': ' Bearer '+token,
+
+      },
+    ).timeout(Duration(seconds: 30),onTimeout: (){
+      return new http.Response(jsonDecode("Time Out"), 500);
+    }
+    );
+    var success = jsonDecode(res.body)['success'];
+    var msg = jsonDecode(res.body)['message'];
+    if(res.statusCode ==200 && success == true){
+
+      print('status : ${res.statusCode}');
+      var json = jsonDecode(res.body)['data']as List;
+      print (json.toString());
+      var colis = json.map((coli) => Data.fromJson(coli)).toList();
+      print(colis);
+      return colis;
+    }else{
+      //  Get.snackbar("Error", msg.toString(),duration: Duration(seconds: 2),
+      //    backgroundColor: Colors.red,colorText: Colors.white,snackPosition: SnackPosition.BOTTOM,margin: EdgeInsets.only(bottom: 20,left: 20,right: 20));
+
+    }
+
+
+  }
+  Future returnShipment(String idShipments,String idMission,String reasonId,String? description)async{
     var pref = await  SharedPreferences.getInstance();
     late String token = pref.getString('token')!;
     var res = await http.post(Uri.parse(mainRepo+'/api/admin/shipments/return'),
@@ -545,6 +624,7 @@ class AuthRepo {
           "shipment_id" :  idShipments,
           "reason_id" : reasonId,
           "is_alert": "1",
+          'reason_description':description!,
         }
 
     ).timeout(Duration(seconds: 30),onTimeout: (){
@@ -558,9 +638,14 @@ class AuthRepo {
     print(reasonId);
 
     print('mybody'+ res.body);
-    var success = jsonDecode(res.body)['status'];
+    var success = jsonDecode(res.body)['success'];
 
     if(res.statusCode == 200 && success == true ){
+      pref.setString("alertidShipment", idShipments);
+      pref.setString("alertidMission", idMission);
+      pref.setString("reasonid", reasonId);
+      String? ID = pref.getString('alertidShipment');
+      print('iddddds'+ID!);
 
 
       Get.snackbar("Success", "the Shipment canceled  with Success!",duration: Duration(seconds: 2),
@@ -572,7 +657,7 @@ class AuthRepo {
 
     }else{
 
-      Get.snackbar("Error", " Connexion probleme ,try again please !",duration: Duration(seconds: 2),
+      Get.snackbar("Error", " Server problem ,try again please !",duration: Duration(seconds: 2),
           backgroundColor: Colors.red,colorText: Colors.white,snackPosition: SnackPosition.BOTTOM,margin: EdgeInsets.only(bottom: 20,left: 20,right: 20));
     }
 
@@ -605,8 +690,7 @@ class AuthRepo {
       print(colis);
       return colis;
     }else{
-      Get.snackbar("Error", msg.toString(),duration: Duration(seconds: 2),
-          backgroundColor: Colors.red,colorText: Colors.white,snackPosition: SnackPosition.BOTTOM,margin: EdgeInsets.only(bottom: 20,left: 20,right: 20));
+
 
     }
 
@@ -648,7 +732,9 @@ class AuthRepo {
 
     }else{
 
-      return false ;
+      Get.snackbar("Error",jsonDecode(res.body)['msg'],duration: Duration(seconds: 2),
+          backgroundColor: Colors.red,colorText: Colors.white,snackPosition: SnackPosition.BOTTOM,margin: EdgeInsets.only(bottom: 20,left: 20,right: 20));
+      return false;
     }
 
   }
@@ -760,5 +846,64 @@ class AuthRepo {
 
 
   }
+  Future isFailedAttempt()async{
+    var pref = await  SharedPreferences.getInstance();
+    late String token = pref.getString('token')!;
+    String reasonId =  pref.getString('reasonid')!;
+    print(reasonId+"resasonnnnn");
+    String missionID = pref.getString('alertidMission')!;
+    String shipmentID = pref.getString('alertidShipment')!;
+    if (reasonId != null && missionID != null && shipmentID != null){
+
+
+    var res = await http.post(Uri.parse(mainRepo+'/api/admin/shipments/return'),
+        headers: {
+          'Accept': 'application/json;charset=UTF-8',
+          'Authorization': ' Bearer '+token,
+        },
+        body: {"mission_id" : missionID,
+          "shipment_id" :  shipmentID,
+          "reason_id" : reasonId,
+          "is_alert": "0",
+          "reason_description":""
+        }
+
+    ).timeout(Duration(seconds: 30),onTimeout: (){
+      return new http.Response(jsonDecode("Time Out"), 500);
+    }
+    );
+
+    print(res.statusCode);
+    print(shipmentID);
+    print(missionID);
+    print(reasonId);
+
+    print('mybody'+ res.body);
+    var success = jsonDecode(res.body)['success'];
+
+    if(res.statusCode == 200 && success == true ){
+       pref.remove('resasonnnnn');
+       pref.remove('alertidMission');
+       pref.remove('alertidShipment');
+       print("alles remove");
+
+      Get.snackbar("Success", " failed attempt  Shipment   is done !",duration: Duration(seconds: 2),
+          backgroundColor: Colors.green,colorText: Colors.white,snackPosition: SnackPosition.BOTTOM,margin: EdgeInsets.only(bottom: 20,left: 20,right: 20));
+
+
+    }else{
+
+      Get.snackbar("Error", " unknown shipment ,try again please !",duration: Duration(seconds: 2),
+          backgroundColor: Colors.red,colorText: Colors.white,snackPosition: SnackPosition.BOTTOM,margin: EdgeInsets.only(bottom: 20,left: 20,right: 20));
+    }
+    }else{
+      print('rani lgit kolech nullll');
+      return;
+
+    }
+
+  }
+
+
 
 }

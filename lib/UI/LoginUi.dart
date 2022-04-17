@@ -142,7 +142,7 @@ class _LoginUiState extends State<LoginUi> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: TextField(
+                        child: TextField(textDirection: TextDirection.ltr,
                           controller: email,
                           keyboardType: TextInputType.emailAddress,
                           autofocus: true,
@@ -162,7 +162,7 @@ class _LoginUiState extends State<LoginUi> {
 
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: TextField(
+                        child: TextField(textDirection: TextDirection.ltr,
                           controller:  password,
 
                          

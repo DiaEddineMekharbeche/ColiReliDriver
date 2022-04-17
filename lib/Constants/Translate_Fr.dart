@@ -94,6 +94,9 @@ const Map<String,String> fr ={
   'Delivery Fees':'Frais de livraison',
   'Default Fees: ':'Frais par défaut : ',
   'All':'Toute',
+  'Add another reason here...':'Ajoutez une autre raison ici...',
+  'Alert':'Alerte',
+  'Reason of Alert:':'Raison de l\'alerte :'
 
 
 

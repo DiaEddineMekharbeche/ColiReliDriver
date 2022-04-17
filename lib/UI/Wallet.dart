@@ -5,6 +5,7 @@
 import 'package:colireli_delivery/Constants/Constants.dart';
 import 'package:colireli_delivery/Controller/ColiCntroller.dart';
 import 'package:colireli_delivery/Models/Coli.dart';
+import 'package:colireli_delivery/Models/Payments.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -133,6 +134,7 @@ class _WalletState extends State<Wallet> {
                         child: Padding(
                           padding: const EdgeInsets.only(right: 4,left: 4),
                           child: IconButton(onPressed: () {
+                            controller.detailsRaport = <Details>[].obs;
                               controller.getPaymentReportController();
                               controller.getDetailsRaportController();
                           }, icon: Icon(Icons.download_outlined,size: 36,color: Colors.black,),

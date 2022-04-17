@@ -210,7 +210,7 @@ class _DeliveryFeePricesState extends State<DeliveryFeePrices> {
 
                 Row(
                   children: [
-                    Text(controller.defaultModelFess.value.deliveryFee.toString()+" ",style: TextStyle(
+                    Text(controller.defaultModelFess.value.deliveryFee.toString(),style: TextStyle(
                         fontSize: 12,fontWeight: FontWeight.bold,color: Colors.red.shade200
                     ), ),
                     Text("DA ".tr,style: TextStyle(
@@ -221,7 +221,7 @@ class _DeliveryFeePricesState extends State<DeliveryFeePrices> {
 
                 Row(
                   children: [
-                    Text(controller.defaultModelFess.value.returnFee.toString()+" ",style: TextStyle(
+                    Text(controller.defaultModelFess.value.returnFee.toString(),style: TextStyle(
                         fontSize: 14,fontWeight: FontWeight.bold,color: Colors.green
                     ), ),
                     Text("DA ".tr,style: TextStyle(

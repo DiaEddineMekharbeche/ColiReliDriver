@@ -64,7 +64,7 @@ class _RestoreShipmentsState extends State<RestoreShipments> {
                     child: CircularProgressIndicator(),
                   );
                 }
-                if (controller.listFailedAttempt.isEmpty) {
+                if (controller.listAlert.isEmpty) {
                   return cardColiEmpty();
                 } else {
                   return cardCloli();
@@ -91,8 +91,8 @@ class _RestoreShipmentsState extends State<RestoreShipments> {
                 onPressed: () {
                   setState(() {
                     controller.postRestoreShipmentsController(_selectedItems.toString(),
-                        controller.listFailedAttempt[0].missionId!.toString());
-                    print(controller.listFailedAttempt[0].missionId);
+                        controller.listAlert[0].missionId!.toString());
+                    print(controller.listAlert[0].missionId);
                     _selectedItems.clear();
                     controller.getFailedAttempt();
                     controller.getOutofDeliveryShipments();
@@ -126,21 +126,24 @@ class _RestoreShipmentsState extends State<RestoreShipments> {
       child: ListView.builder(
         shrinkWrap: true,
         physics: const AlwaysScrollableScrollPhysics(),
-        itemCount: controller.listFailedAttempt.length,
+        itemCount: controller.listAlert.length,
         itemBuilder: (context, i) {
           return Padding(
             padding:
-            const EdgeInsets.only(left: 8, right: 8, bottom: 8, top: 2),
+            const EdgeInsets.only(left: 4, right: 4, bottom: 6, top: 2),
             child: Material(
               elevation: 3,
               borderRadius: BorderRadius.all(Radius.circular(20)),
               child: Container(
+
                   padding:
-                  EdgeInsets.only(left: 10, right: 14, top: 10, bottom: 10),
+                  EdgeInsets.only(left: 10, right: 8, top: 10, bottom: 10),
                   height: size.height / 7.3,
                   width: size.width,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
+
+
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -154,10 +157,10 @@ class _RestoreShipmentsState extends State<RestoreShipments> {
                             width: 0,
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(right: 8, top: 0),
+                            padding: const EdgeInsets.only(right: 6, top: 0),
                             child: Image.asset(
-                              'assets/boxBlueFill.png',
-                              height: size.height / 15,
+                              'assets/boite.png',
+                              height: size.height / 18,
                               width: size.width / 10,
                             ),
                           ),
@@ -181,12 +184,15 @@ class _RestoreShipmentsState extends State<RestoreShipments> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 5),
-                                    child: Text(
-                                      controller.listFailedAttempt[i].code!,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
+                                    child: Container(
+
+                                      child: Text(
+                                        controller.listAlert[i].code!,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -210,12 +216,13 @@ class _RestoreShipmentsState extends State<RestoreShipments> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 5),
+                                    padding: const EdgeInsets.only(left: 2),
                                     child: Container(
+
                                       width: size.width / 4.0,
                                       child: Text(
-                                        controller.listFailedAttempt[i]
-                                            .state!.name!+","+controller.listFailedAttempt[i].area!.name!
+                                        controller.listAlert[i]
+                                            .state!.name!+","+controller.listAlert[i].area!.name!
                                             .toUpperCase(),
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
@@ -247,22 +254,28 @@ class _RestoreShipmentsState extends State<RestoreShipments> {
                                     padding: const EdgeInsets.only(left: 5),
                                     child: Row(
                                       children: [
-                                        Text(
-                                          (controller.listFailedAttempt[i]
-                                              .amountToBeCollected!).toString() +
-                                              ',00 ',
-                                          style: TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w600,
+                                        Container(
+
+                                          child: Text(
+                                            (controller.listAlert[i]
+                                                .amountToBeCollected!).toString() +
+                                                ',00 ',
+                                            style: TextStyle(
+                                              color: Colors.red,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                           ),
                                         ),
-                                        Text(
-                                          "DA ".tr,
-                                          style: TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w600,
+                                        Container(
+
+                                          child: Text(
+                                            "DA ".tr,
+                                            style: TextStyle(
+                                              color: Colors.red,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -276,17 +289,17 @@ class _RestoreShipmentsState extends State<RestoreShipments> {
                           Checkbox(
                             checkColor: Colors.white,
                             fillColor: MaterialStateProperty.resolveWith(getColor),
-                            value:controller.listFailedAttempt[i].isSelected ,
+                            value:controller.listAlert[i].isSelected  ,
                             onChanged: (bool? value) {
                               setState(() {
                                 print(value.toString());
-                                controller.listFailedAttempt[i].isSelected = value!;
-                                print(controller.listFailedAttempt[i].isSelected.toString());
-                                if(controller.listFailedAttempt[i].isSelected == true){
-                                  _selectedItems.add(controller.listFailedAttempt[i].id!.toString());
+                                controller.listAlert[i].isSelected = value!;
+                                print(controller.listAlert[i].isSelected.toString());
+                                if(controller.listAlert[i].isSelected == true){
+                                  _selectedItems.add(controller.listAlert[i].id!.toString());
                                 }
-                                if(controller.listFailedAttempt[i].isSelected == false){
-                                  _selectedItems.remove(controller.listFailedAttempt[i].id!.toString());
+                                if(controller.listAlert[i].isSelected == false){
+                                  _selectedItems.remove(controller.listAlert[i].id!.toString());
                                 }
                                 print(_selectedItems.toString());
 
@@ -321,7 +334,7 @@ class _RestoreShipmentsState extends State<RestoreShipments> {
         child: Container(
           child: Column(
             children: [
-              Image.asset('assets/empty.png',
+              Image.asset('assets/boitevide.png',
                   height: size.height / 4, width: size.width / 5),
               Text(
                 "Failed Attempt Shipments".tr,

@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'Shipment_Card.dart';
 import 'UserInfo.dart';
@@ -233,6 +234,7 @@ class _ProfileState extends State<Profile> {
                           InkWell(
                             onTap: () {
                              // Get.to(()=>UserInfo() , transition: Transition.leftToRight,
+                              _makePhoneCall('tel:+213554 27 78 68');
 
                             //  );
                             },
@@ -409,5 +411,13 @@ class _ProfileState extends State<Profile> {
 
     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginUi()), (route) => false);
 
+  }
+
+  Future<void> _makePhoneCall(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

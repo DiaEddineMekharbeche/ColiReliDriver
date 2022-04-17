@@ -1,4 +1,5 @@
 
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:colireli_delivery/Constants/Constants.dart';
@@ -6,6 +7,9 @@ import 'package:colireli_delivery/Models/Coli.dart';
 import 'package:colireli_delivery/Models/Colis.dart';
 import 'package:colireli_delivery/Models/DeliveryUser.dart';
 import 'package:colireli_delivery/Models/Driver_fees.dart';
+import 'package:colireli_delivery/Models/Keys.dart';
+import 'package:colireli_delivery/Models/Keys.dart';
+import 'package:colireli_delivery/Models/Keys.dart';
 import 'package:colireli_delivery/Models/Mission.dart';
 import 'package:colireli_delivery/Models/Payments.dart';
 import 'package:colireli_delivery/Models/Reasons.dart';
@@ -34,10 +38,14 @@ class ColiController extends GetxController {
   var listColi = <Data>[].obs;
   var lisDeliveredColi = <Data>[].obs;
   var lisDeliveredFees = <DriverFees>[].obs;
+  var listKeys = <Type>[].obs;
+  var listString =<String> [].obs;
   var lisDeliveredDEfaultFees = <DefaultDriverFee>[].obs;
   var ListAssignedShipment = <Data>[].obs;
   var listFailedAttempt = <Data>[].obs;
+  var listAlert = <Data>[].obs;
   var listReports = <Rapport>[].obs;
+  var listempty = <Rapport>[].obs;
   var listColinew = <Data>[];
   var ListMission = <Mission>[].obs;
   var listids = <int>[].obs;
@@ -51,9 +59,11 @@ class ColiController extends GetxController {
   var shipments;
   var deliveredColi;
   var deliveryFees;
+  var keeys;
   var deliveryDefaultFees;
   var assignedColi;
   var failedAttempt;
+  var alertvalue;
   var paymentReport;
   var reports = Rapport().obs;
   var details;
@@ -305,13 +315,6 @@ class ColiController extends GetxController {
 
 
         print('array length :' + listColi.length.toString());
-      } else {
-        Get.snackbar("Starting", "Please Create a Mission to Start",
-            duration: Duration(seconds: 2),
-            backgroundColor: ColiReliOrange,
-            colorText: Colors.white,
-            snackPosition: SnackPosition.BOTTOM,
-            margin: EdgeInsets.only(bottom: 20, left: 20, right: 20));
       }
     } catch (e) {
       throw Exception(e.toString());
@@ -375,8 +378,8 @@ class ColiController extends GetxController {
         // print(listColi.value.toString());
         // allColis.add(colis);
 
-
       }
+
     } catch (e) {
       throw Exception("Error catch"+e.toString());
     } finally {
@@ -384,15 +387,59 @@ class ColiController extends GetxController {
     }
   }
 
-  getReasonsController() async {
+  getReasonsController(String name) async {
     try {
       isLoading(true);
 
-      var reasons = await repo.getReasons();
+      int index = listKeys.indexWhere((f) => f.translation == name);
+      print(index);
+      String? nameorigin = listKeys[index].origin;
+       var lang =  Get.locale!.languageCode;
+      var prefix = lang[0].trim();
+
+      print('language:'+lang.toString());
+      print('language:'+prefix);
+      var reasons = await repo.getReasons(nameorigin!,lang);
 
       if (reasons != null) {
         //ListMission.addAll(mission);
         reasonsList.value = reasons;
+        // print(listColi.value.toString());
+        // allColis.add(colis);
+
+
+      } else {
+        Get.snackbar(""
+            "Information", "Error Server please try again  ",
+            duration: Duration(seconds: 2),
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+            snackPosition: SnackPosition.BOTTOM,
+            margin: EdgeInsets.only(bottom: 20, left: 20, right: 20));
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    } finally {
+      isLoading(false);
+    }
+  }
+  getKeysController() async {
+    try {
+      isLoading(true);
+      var lang =  Get.locale!.languageCode ;
+
+      var prefix = lang[0].trim();
+
+      print('language:'+lang.toString());
+      print('language:'+prefix);
+      var reasons = await repo.getKeys(lang);
+
+      if (reasons != null) {
+        //ListMission.addAll(mission);
+        listKeys.value = reasons;
+        print(listKeys[1].translation);
+
+
         // print(listColi.value.toString());
         // allColis.add(colis);
 
@@ -438,14 +485,39 @@ class ColiController extends GetxController {
     }
   }
 
-  returnShipmentController() async {
+  getAlertShipment() async {
+    try {
+      isLoading(true);
+
+      alertvalue = await repo.getAlertShipment();
+
+      if (alertvalue != null) {
+        //ListMission.addAll(mission);
+        listAlert.value = alertvalue;
+        // print(listColi.value.toString());
+        // allColis.add(colis);
+
+
+        print('array length :' + listAlert.length.toString());
+      } else {
+        print("list failed Attempt is empty");
+      }
+    } catch (e) {
+
+
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  returnShipmentController(String? desc) async {
     try {
       isLoading(true);
       var pref = await SharedPreferences.getInstance();
       String reasonId = pref.getString('id')!;
       String missionID = pref.getString('idmission')!;
       String shipmentID = pref.getString('shipmentid')!;
-       await repo.returnShipment(shipmentID, missionID, reasonId);
+       await repo.returnShipment(shipmentID, missionID, reasonId,desc!);
       getOutofDeliveryShipments();
       getFailedAttempt();
 
@@ -499,7 +571,7 @@ class ColiController extends GetxController {
         print("failed , mission is done ");
       }
     } catch (e) {
-      isError(true);
+
     } finally {
       isLoading(false);
     }
@@ -601,6 +673,30 @@ class ColiController extends GetxController {
     } catch (e) {
 
 
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  isFailedAttemptShipmentController() async {
+    try {
+      isLoading(true);
+      var pref = await SharedPreferences.getInstance();
+
+
+
+
+
+
+
+
+
+          repo.isFailedAttempt();
+
+
+      print('ani postit return shipment');
+    } catch (e) {
+      throw Exception(e.toString());
     } finally {
       isLoading(false);
     }

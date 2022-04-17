@@ -132,7 +132,7 @@ class _AssignedShipmentState extends State<AssignedShipment> {
               child: Container(
                   padding:
                   EdgeInsets.only(left: 10, right: 14, top: 10, bottom: 10),
-                  height: size.height / 9,
+                  height: size.height / 8,
                   width: size.width,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -151,7 +151,7 @@ class _AssignedShipmentState extends State<AssignedShipment> {
                           Padding(
                             padding: const EdgeInsets.only(right: 8, top: 0),
                             child: Image.asset(
-                              'assets/boxBlueFill.png',
+                              'assets/boite.png',
                               height: size.height / 15,
                               width: size.width / 10,
                             ),
@@ -207,7 +207,7 @@ class _AssignedShipmentState extends State<AssignedShipment> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 5),
                                     child: Container(
-                                      width: size.width / 4.0,
+                                      width: size.width / 5.0,
                                       child: Text(
                                         controller.ListAssignedShipment[i].state!.name!+","+
                                             controller.ListAssignedShipment[i].area!.name!
@@ -297,27 +297,31 @@ class _AssignedShipmentState extends State<AssignedShipment> {
 
     return Expanded(
       child: Center(
-        child: Container(
-          child: Column(
-            children: [
-              Image.asset('assets/empty.png',
-                  height: size.height / 4, width: size.width / 5),
-              Text(
+        child: Column(
+         crossAxisAlignment: CrossAxisAlignment.center,
+
+          children: [
+            Image.asset('assets/boitevide.png',
+                height: size.height / 4, width: size.width / 5),
+            Center(
+              child: Text(
                 "List is Empty".tr,
                 style: TextStyle(
                     fontWeight: FontWeight.normal,
                     fontSize: 20,
                     color: Colors.grey),
               ),
-              Text(
+            ),
+            Center(
+              child: Text(
                 "Create a mission to start!".tr,
                 style: TextStyle(
                     fontWeight: FontWeight.normal,
                     fontSize: 20,
                     color: Colors.grey),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

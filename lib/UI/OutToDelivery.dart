@@ -136,8 +136,8 @@ class _OutToDeliveryState extends State<OutToDelivery> {
               borderRadius: BorderRadius.all(Radius.circular(20)),
               child: Container(
                   padding:
-                      EdgeInsets.only(left: 10, right: 14, top: 10, bottom: 10),
-                  height: size.height / 9,
+                      EdgeInsets.only(left: 5, right: 2, top: 10, bottom: 10),
+                  height: size.height / 8,
                   width: size.width,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -155,8 +155,8 @@ class _OutToDeliveryState extends State<OutToDelivery> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(right: 8, top: 0),
-                            child: Image.asset(
-                              'assets/boxBlueFill.png',
+                            child:  Image.asset(
+                              'assets/boite.png',
                               height: size.height / 15,
                               width: size.width / 10,
                             ),
@@ -210,9 +210,10 @@ class _OutToDeliveryState extends State<OutToDelivery> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 5),
+                                    padding: const EdgeInsets.only(left: 2),
                                     child: Container(
-                                      width: size.width / 4.0,
+
+                                      width: size.width / 5.0,
                                       child: Text(
                                         controller.ListMission[i].shipment!
                                             .reciverAddress!
@@ -310,7 +311,7 @@ class _OutToDeliveryState extends State<OutToDelivery> {
         child: Container(
           child: Column(
             children: [
-              Image.asset('assets/empty.png',
+              Image.asset('assets/boitevide.png',
                   height: size.height / 4, width: size.width / 5),
               Text(
                 "List is Empty".tr,

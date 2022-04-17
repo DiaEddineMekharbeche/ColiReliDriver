@@ -24,6 +24,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+
 class home extends StatefulWidget {
 
   @override
@@ -86,9 +87,9 @@ final controller = Get.put(ColiController());
     );
 
   }
-  Widget getFooter(){
+ Widget getFooter(){
     return BottomNavyBar(
-      animationDuration: Duration(milliseconds: 300),
+      animationDuration: Duration(milliseconds: 100),
 
       showElevation: true,
       selectedIndex: index,

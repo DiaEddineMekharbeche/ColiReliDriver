@@ -58,16 +58,16 @@ class Rapport {
         this.code});
 
   Rapport.fromJson(Map<String, dynamic> json) {
-    total = json['total'];
-    deliveryFee = json['delivery_fee'];
-    missionId = json['mission_id'];
-    captainId = json['captain_id'];
-    branchId = json['branch_id'];
-    paymentStatus = json['payment_status'];
-    updatedAt = json['updated_at'];
-    createdAt = json['created_at'];
-    id = json['id'];
-    code = json['code'];
+    total = json['total']?? 0;
+    deliveryFee = json['delivery_fee']?? 0;
+    missionId = json['mission_id'] ?? 0;
+    captainId = json['captain_id']?? 0;
+    branchId = json['branch_id']?? 0;
+    paymentStatus = json['payment_status']?? 0;
+    updatedAt = json['updated_at']?? '';
+    createdAt = json['created_at']?? '';
+    id = json['id']?? 0;
+    code = json['code']?? '';
   }
 
   Map<String, dynamic> toJson() {
@@ -103,12 +103,12 @@ class Details {
         this.status});
 
   Details.fromJson(Map<String, dynamic> json) {
-    trackingCode = json['traking_code'];
-    cost = json['cost'];
-    price = json['price'];
-    deliveryFee = json['delivery_fee'];
-    amountToBoCollected = json['amount_to_bo_collected'];
-    status = json['Status'];
+    trackingCode = json['traking_code']??'';
+    cost = json['cost']?? 0;
+    price = json['price']?? 0;
+    deliveryFee = json['delivery_fee']?? 0;
+    amountToBoCollected = json['amount_to_bo_collected']??0;
+    status = json['Status']??'';
   }
 
   Map<String, dynamic> toJson() {

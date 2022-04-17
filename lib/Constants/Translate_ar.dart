@@ -95,6 +95,9 @@ const Map<String, String> ar = {
   'Delivery Fees':'تكاليف التوصيل',
   'Default Fees: ':'تكاليف التوصيل',
   'All':'الكل',
+  'Add another reason here...':'أضف سببًا آخر هنا ...',
+  'Alert':'إنذار',
+  'Reason of Alert:':'سبب الانذار:  '
 
 
 };

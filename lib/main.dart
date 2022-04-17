@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:colireli_delivery/Constants/Constants.dart';
 import 'package:colireli_delivery/Controller/Translation.dart';
@@ -5,12 +7,14 @@ import 'package:colireli_delivery/UI/Dashboard.dart';
 import 'package:colireli_delivery/UI/OutToDelivery.dart';
 import 'package:colireli_delivery/UI/Shipment_Card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_background/flutter_background.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Controller/ColiCntroller.dart';
 import 'UI/LoginUi.dart';
 import 'UI/Profile.dart';
 import 'UI/Stats.dart';
@@ -19,12 +23,15 @@ import 'UI/home.dart';
 
 String?  token;
 Future<void> main() async{
+
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   token = await prefs.getString("token");
   print("tokenn is:$token");
+
+
 
   runApp(MyApp());
 }
@@ -44,7 +51,7 @@ class MyApp extends StatelessWidget {
           primaryColor: colireli,
           scaffoldBackgroundColor: Colors.white,
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          textTheme: GoogleFonts.latoTextTheme(
+          textTheme: GoogleFonts.montserratTextTheme(
               Theme.of(context).textTheme
           )
       ),

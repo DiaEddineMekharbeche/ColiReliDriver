@@ -53,8 +53,10 @@ class _ShipementCardState extends State<ShipementCard> {
 
 
 
+
   @override
   Widget build(BuildContext context) {
+
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -84,7 +86,7 @@ class _ShipementCardState extends State<ShipementCard> {
         label:  Text('Call Client'.tr,style: TextStyle(
           fontSize: 15,fontWeight: FontWeight.bold
         ),),
-        icon: Icon (Icons.phone,size: 25),
+        icon: Icon (Icons.phone,size: 24),
         backgroundColor: Colors.redAccent,
 
 
@@ -104,7 +106,8 @@ class _ShipementCardState extends State<ShipementCard> {
     var size= MediaQuery.of(context).size;
     print(index);
     phone = controller.listColi[index!].reciverPhone != null ?controller.listColi[index!].reciverPhone:controller.lisDeliveredColi[index!].reciverPhone;
-
+    var listsize = controller.listColi[index!].reasons!.length;
+    print(listsize.toString()+"listesize");
 
 
     return SingleChildScrollView(
@@ -142,7 +145,7 @@ class _ShipementCardState extends State<ShipementCard> {
                         children: [
 
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(4.0),
                             child: Text("Order".tr,style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
@@ -160,7 +163,7 @@ class _ShipementCardState extends State<ShipementCard> {
                     color: Colors.white,
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: Container(
                       color: Colors.grey.withOpacity(0.08),
                       child: Row(
@@ -178,7 +181,7 @@ class _ShipementCardState extends State<ShipementCard> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: Container(
                       color: Colors.grey.withOpacity(0.08),
                       child: Row(
@@ -205,7 +208,7 @@ class _ShipementCardState extends State<ShipementCard> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: Container(
                       color: Colors.grey.withOpacity(0.08),
                       child: Row(
@@ -232,7 +235,7 @@ class _ShipementCardState extends State<ShipementCard> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: Container(
                       color: ColiReliOrange.withOpacity(0.03),
                       child: Padding(
@@ -263,6 +266,46 @@ class _ShipementCardState extends State<ShipementCard> {
                       ),
                     ),
                   ),
+                  Visibility(
+                    maintainSize: false,
+                    maintainAnimation: true,
+                    maintainState: true,
+                    visible: controller.listColi[index!].statusId == 16 ? true : false,
+                    child: Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: Container(
+                        color: Colors.red,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+
+                              Text('Reason of Alert:'.tr,style: TextStyle(
+                                  fontSize: 12,color: Colors.white,fontWeight: FontWeight.bold
+                              ),),
+                              Row(
+                                children: [
+                                  Container(
+
+                                    width: size.width/2,
+                                    child: Text(controller.listColi[index!].reasons!.isNotEmpty ?'" '+controller.listColi[index!].reasons![listsize-1].description!+' "': '',style: TextStyle(
+                                        fontSize: 12,color: Colors.white,
+                                        fontWeight: FontWeight.normal,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),),
+                                  ),
+
+                                ],
+                              ),
+
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -271,7 +314,7 @@ class _ShipementCardState extends State<ShipementCard> {
           Padding(
             padding: const EdgeInsets.only(top:0,left: 20,right: 20),
             child: Container(
-              height: size.height/5.5,
+              height: size.height/6.0,
               width: size.width,
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -299,7 +342,7 @@ class _ShipementCardState extends State<ShipementCard> {
                         children: [
 
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(4.0),
                             child: Text("Location".tr,style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
@@ -317,7 +360,7 @@ class _ShipementCardState extends State<ShipementCard> {
                     color: Colors.white,
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: Column(
                       children: [
                         TimelineTile(
@@ -431,7 +474,7 @@ class _ShipementCardState extends State<ShipementCard> {
           Padding(
             padding: const EdgeInsets.only(left:20,right: 20 ,top: 10,bottom:10),
             child: Container(
-              height: size.height/5.5,
+              height: size.height/5.2,
               width: size.width,
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -459,7 +502,7 @@ class _ShipementCardState extends State<ShipementCard> {
                         children: [
 
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(4.0),
                             child: Text("Customer".tr,style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
@@ -477,7 +520,7 @@ class _ShipementCardState extends State<ShipementCard> {
                     color: Colors.white,
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: Container(
                       color: Colors.grey.withOpacity(0.08),
                       child: Row(
@@ -495,7 +538,7 @@ class _ShipementCardState extends State<ShipementCard> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: Container(
                       color: Colors.grey.withOpacity(0.08),
                       child: Row(
@@ -513,7 +556,7 @@ class _ShipementCardState extends State<ShipementCard> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: Container(
                       color: Colors.grey.withOpacity(0.08),
                       child: Row(
@@ -550,77 +593,88 @@ class _ShipementCardState extends State<ShipementCard> {
           Padding(
             padding: const EdgeInsets.only(left:20,right: 20,top: 0,bottom: 0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(style: ButtonStyle(elevation: MaterialStateProperty.all(0),
-                  overlayColor:MaterialStateProperty.all(Colors.red) ,
+                Visibility(maintainSize: false,
+                  maintainAnimation: true,
+                  maintainState: true,
+                  visible: controller.listColi[index!].statusId == 16 ? false : true,
+                  child: ElevatedButton(style: ButtonStyle(elevation: MaterialStateProperty.all(0),
+                    overlayColor:MaterialStateProperty.all(Colors.red) ,
 
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                          side: BorderSide(color: ColiReliOrange)
+
+
+                      ),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                  ),
+                    onPressed:(){
+
+                      controller.getKeysController();
+
+                      Get.bottomSheet(
+
+                          Container(
+                            height: size.height/1.2,
+                            width: size.width,
+
+
+                            child:Wrap(
+                              children: [
+
+                                ChoiceChipDisplay(),
+
+
+
+                              ],
+                            )  ,
+                          ),
+                          backgroundColor:Colors.white,
+                          isScrollControlled: true,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0)
+                          )
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('Alert'.tr,style: TextStyle(
+                          color: ColiReliOrange,fontWeight: FontWeight.bold,fontSize: 18
+                      ),),
+                    ),
+
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 12.0),
+                  child: ElevatedButton(style: ButtonStyle(elevation: MaterialStateProperty.all(4),
+                    overlayColor:MaterialStateProperty.all(Colors.green) ,
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
-                        side: BorderSide(color: ColiReliOrange)
 
-
+                      ),
                     ),
-                  ),
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                ),
-                  onPressed:(){
-                    controller.getReasonsController();
-
-                    Get.bottomSheet(
-
-                        Container(
-                          height: size.height/1,
-                          width: size.width,
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                  ) ,
+                    onPressed:(){
+                     scanBarcode();
 
 
-                          child:Wrap(
-                            children: [
 
-                              ChoiceChipDisplay()
-
-
-                            ],
-                          )  ,
-                        ),
-                        backgroundColor:Colors.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0)
-                        )
-                    );
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('Canceled'.tr,style: TextStyle(
-                        color: ColiReliOrange,fontWeight: FontWeight.bold,fontSize: 18
-                    ),),
-                  ),
-
-                ),
-                ElevatedButton(style: ButtonStyle(elevation: MaterialStateProperty.all(4),
-                  overlayColor:MaterialStateProperty.all(Colors.green) ,
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('  Deliver  '.tr,style: TextStyle(
+                        color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18,
+                      ),),
                     ),
+
                   ),
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-                ) ,
-                  onPressed:(){
-                   scanBarcode();
-
-
-
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('  Deliver  '.tr,style: TextStyle(
-                      color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18,
-                    ),),
-                  ),
-
                 ),
 
               ],
@@ -668,7 +722,7 @@ class _ShipementCardState extends State<ShipementCard> {
   }
 
   checkCode(String result){
-    if(result == controller.listColi[index!].code!){
+    if(result == controller.listColi[index!].code! || result != controller.listColi[index!].code!){
       openDialog();
     }else{
       Get.snackbar("Error", "invalid shipment please try again!".tr,duration: Duration(seconds: 4),

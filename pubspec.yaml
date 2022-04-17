@@ -56,6 +56,10 @@ dependencies:
   flutter_local_notifications: 9.2.0
   rxdart: ^0.27.3
   comment_box: ^0.0.17
+  flutter_background_service: 0.1.0
+  flutter_background: ^1.1.0
+
+
 
   timezone: ^0.8.0
 
@@ -99,6 +103,8 @@ flutter:
      - assets/transLogo.png
      - assets/coliReliLogo.png
      - assets/logoDriver.png
+     - assets/boite.png
+     - assets/boitevide.png
 
 
 

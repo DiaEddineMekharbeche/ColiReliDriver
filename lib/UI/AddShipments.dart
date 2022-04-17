@@ -9,12 +9,12 @@ import 'package:get/get.dart';
 
 import 'Shipment_Card.dart';
 
-class ColiScanned extends StatefulWidget {
+class AddShipments extends StatefulWidget {
   @override
-  _ColiScannedState createState() => _ColiScannedState();
+  _AddShipmentsState createState() => _AddShipmentsState();
 }
 
-class _ColiScannedState extends State<ColiScanned> {
+class _AddShipmentsState extends State<AddShipments> {
   final controller = Get.put(ColiController());
   var repo = AuthRepo();
   late List<int> listids = [];
@@ -156,7 +156,7 @@ class _ColiScannedState extends State<ColiScanned> {
                 child: Container(
                     padding: EdgeInsets.only(
                         left: 10, right: 10, top: 10, bottom: 10),
-                    height: size.height / 8,
+                    height: size.height / 9,
                     width: size.width,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -175,7 +175,7 @@ class _ColiScannedState extends State<ColiScanned> {
                             Padding(
                               padding: const EdgeInsets.only(right: 8, top: 0),
                               child: Image.asset(
-                                'assets/boite.png',
+                                'assets/boxBlueFill.png',
                                 height: size.height / 15,
                                 width: size.width / 10,
                               ),
@@ -309,7 +309,7 @@ class _ColiScannedState extends State<ColiScanned> {
         child: Container(
           child: Column(
             children: [
-              Image.asset('assets/boitevide.png',
+              Image.asset('assets/empty.png',
                   height: size.height / 4, width: size.width / 5),
               Text(
                 "Please Scan the Courier".tr,

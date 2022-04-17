@@ -1,21 +1,27 @@
 class Colis {
   bool? success;
   String? message;
-  Data? data;
+  List<Data>? data;
 
-  Colis({this.success, this.data,this.message});
+  Colis({this.success, this.message, this.data});
 
   Colis.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(new Data.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['success'] = this.success;
+    data['message'] = this.message;
     if (this.data != null) {
-      data['data'] = this.data!.toJson();
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -33,13 +39,13 @@ class Data {
   String? clientAddress;
   int? paymentType;
   int? paid;
-  bool? isSelected = false;
   int? paymentIntegrationId;
   int? paymentMethodId;
   int? tax;
   int? insurance;
   String? deliveryTime;
   int? shippingCost;
+  int? cost;
   int? totalWeight;
   int? employeeUserId;
   String? clientStreetAddressMap;
@@ -68,7 +74,7 @@ class Data {
   int? toCountryId;
   int? toStateId;
   int? toAreaId;
-  int? prevBranch;
+  String? prevBranch;
   int? fromBranchId;
   int? toBranchId;
   int? clientStatus;
@@ -83,6 +89,8 @@ class Data {
   FromAddress? fromAddress;
   State? state;
   State? area;
+  bool? isSelected = false;
+  List<Description>? reasons;
 
   Data(
       {this.id,
@@ -102,6 +110,7 @@ class Data {
         this.insurance,
         this.deliveryTime,
         this.shippingCost,
+        this.cost,
         this.totalWeight,
         this.employeeUserId,
         this.clientStreetAddressMap,
@@ -144,10 +153,11 @@ class Data {
         this.pay,
         this.fromAddress,
         this.state,
-        this.area});
+        this.area,
+        this.reasons});
 
   Data.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = json['id'] ;
     code = json['code'];
     statusId = json['status_id'];
     paymentStatus = json['payment_status'];
@@ -164,6 +174,7 @@ class Data {
     insurance = json['insurance'];
     deliveryTime = json['delivery_time'];
     shippingCost = json['shipping_cost'];
+    cost = json['cost'];
     totalWeight = json['total_weight'];
     employeeUserId = json['employee_user_id'];
     clientStreetAddressMap = json['client_street_address_map'];
@@ -209,6 +220,12 @@ class Data {
         : null;
     state = json['state'] != null ? new State.fromJson(json['state']) : null;
     area = json['area'] != null ? new State.fromJson(json['area']) : null;
+    if (json['reasons'] != null) {
+      reasons = <Description>[];
+      json['reasons'].forEach((v) {
+        reasons!.add(new Description.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -230,6 +247,7 @@ class Data {
     data['insurance'] = this.insurance;
     data['delivery_time'] = this.deliveryTime;
     data['shipping_cost'] = this.shippingCost;
+    data['cost'] = this.cost;
     data['total_weight'] = this.totalWeight;
     data['employee_user_id'] = this.employeeUserId;
     data['client_street_address_map'] = this.clientStreetAddressMap;
@@ -281,6 +299,9 @@ class Data {
     if (this.area != null) {
       data['area'] = this.area!.toJson();
     }
+    if (this.reasons != null) {
+      data['reasons'] = this.reasons!.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }
@@ -290,7 +311,7 @@ class Pay {
   String? type;
   String? value;
   String? key;
-  Null? lang;
+  String? lang;
   String? name;
   String? createdAt;
   String? updatedAt;
@@ -337,10 +358,10 @@ class FromAddress {
   int? countryId;
   int? stateId;
   int? areaId;
-  Null? clientStreetAddressMap;
-  Null? clientLat;
-  Null? clientLng;
-  Null? clientUrl;
+  String? clientStreetAddressMap;
+  String? clientLat;
+  String? clientLng;
+  String? clientUrl;
   String? createdAt;
   String? updatedAt;
 
@@ -406,6 +427,31 @@ class State {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
+    return data;
+  }
+}
+
+class Description {
+  int? id;
+  int? shipmentId;
+  String? type;
+  String? description;
+
+  Description({this.id, this.shipmentId, this.type, this.description});
+
+  Description.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    shipmentId = json['shipment_id'];
+    type = json['type'];
+    description = json['description'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['shipment_id'] = this.shipmentId;
+    data['type'] = this.type;
+    data['description'] = this.description;
     return data;
   }
 }
